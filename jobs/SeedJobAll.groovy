@@ -74,7 +74,7 @@ public class BasePipelineJob {
 
     String name
     String description
-    String gitubOwnerRepo
+    String githubOwnerRepo
     String credentialID
     String scriptPath
 
