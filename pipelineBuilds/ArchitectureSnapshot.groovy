@@ -9,6 +9,7 @@ node {
 
             //Build
             dir ('acn-hpsapf-arch-parent') {
+                echo 'INFO: Executing maven build'
                 try {
                     withMaven {
                         //Parent POM location com.accenture.hpsapf.dsl.parent/pom.xml
@@ -16,26 +17,27 @@ node {
                     }
                     echo 'INFO: Maven build was SUCCESSFULL'
                 } catch (e) {
+                    echo 'WARNING: Maven build threw exception'
+                } finally {
                     //TODO: Check the right test result directory
+                    echo 'INFO: Archiving build artifacts'
                     step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
                     step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
                     if (currentBuild.result == 'UNSTABLE') {
                         echo 'WARNING: Maven build is UNSTABLE'
-                    } else {
+                    } else if (currentBuild.result == 'SUCCESS'){
                         echo 'WARNING: Maveen build FAILED'
                         currentBuild.result = 'FAILURE'
                     }
                 }
 
-                //Post Steps
-                if (currentBuild.result == 'SUCCESS') {
-                    echo 'INFO: Setting build name'
-                    pom = readMavenPom file: 'pom.xml'
-                    currentBuild.displayName = "$pom.version($env.BUILD_NUMBER)"
-                    echo 'INFO: Executing sonar check'
-                    withMaven {
-                        sh "mvn sonar:sonar -B"
-                    }
+                //Post Steps 
+                echo 'INFO: Setting build name'
+                pom = readMavenPom file: 'pom.xml'
+                currentBuild.displayName = "$pom.version($env.BUILD_NUMBER)"
+                echo 'INFO: Executing sonar check'
+                withMaven {
+                    sh "mvn sonar:sonar -B"
                 }
             }
         }

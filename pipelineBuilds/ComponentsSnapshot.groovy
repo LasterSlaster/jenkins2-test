@@ -16,7 +16,8 @@ node {
                 currentBuild.displayName = "$pom.version($env.BUILD_NUMBER)"
 
                 //Invoke top-level Maven targets
-                echo 'INFO: Executing Maven deploy'
+                echo 'INFO: Executing Maven build'
+                //TODO: Check if test results must be archived
                 withMaven {
                     //Parent POM location com.accenture.hpsapf.dsl.parent/pom.xml
                     sh "mvn clean deploy -Dmaven.buildmode=ci -Dfile.encoding=UTF-8 -DaltDeploymentRepository=snapshots::default::http://172.31.22.80:8081/nexus/content/repositories/snapshots/ -B -X"
@@ -24,18 +25,21 @@ node {
 
                 //Build
                 try {
-                    echo 'INFO: Executing Maven deploy'
+                    echo 'INFO: Executing Maven build'
                     withMaven {
                         //Parent POM location com.accenture.hpsapf.dsl.parent/pom.xml
                         sh "mvn clean deploy -Dmaven.buildmode=ci -Dfile.encoding=UTF-8 -DaltDeploymentRepository=snapshots::default::http://172.31.22.80:8081/nexus/content/repositories/snapshots/ -B -X"
                     }
                 } catch (e) {
+                    echo 'WARNING: Maven build threw exception'
+                } finally {
                     //TODO: Check the right test result directory
+                    echo 'INFO: Archiving build artifacts'
                     step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
                     step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
                     if (currentBuild.result == 'UNSTABLE') {
                         echo 'WARNING: Maven build is UNSTABLE'
-                    } else {
+                    } else if (currentBuild.result == 'SUCCESS'){
                         echo 'WARNING: Maveen build FAILED'
                         currentBuild.result = 'FAILURE'
                     }
