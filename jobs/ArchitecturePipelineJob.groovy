@@ -1,4 +1,3 @@
-package main.jobs
 package jobs
 
 import javaposse.jobdsl.dsl.Job
