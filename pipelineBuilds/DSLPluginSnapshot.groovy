@@ -4,7 +4,7 @@ node {
     timestamps {
         try {
             currentBuild.result = 'SUCCESS'
-            checkout changelog: true, poll: true, scm: [$class: 'GitSCM', branches: [[name: 'refs/heads/master']], browser: [$class: 'GitLab', repoUrl: 'http://172.31.22.80/gitweb/hpsapf-tools.git', version: 8.2], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'myID', url: 'http://172.31.22.80/gitweb/hpsapf-tools.git']]]
+            checkout changelog: true, poll: true, scm: [$class: 'GitSCM', branches: [[name: 'refs/heads/master']], browser: [$class: 'GitLab', repoUrl: 'http://172.31.22.80/gitweb/hpsapf-tools.git', version: '8.2'], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'myID', url: 'http://172.31.22.80/gitweb/hpsapf-tools.git']]]
 
             //Build
             try {
