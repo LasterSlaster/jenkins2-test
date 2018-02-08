@@ -10,7 +10,7 @@ public class ComponentsPipelineTriggerJob {
     String triggerPipeline
     int stage
 
-    static void createJob(def dslFactory) {
+    Job createJob(def dslFactory) {
         def triggerJob = dslFactory.job(this.name) {
             description('Job to watch the repository ' + this.githubOwnerRepo + ' and trigger the pipeline ' + this.triggerPipeline ' at stage ' + this.stage)
             scm {

@@ -10,7 +10,7 @@ public class ArchitecturePipelineJob {
     String credentialID
     String scriptPath
 
-    static void createJob(def dslFactory) {
+    Job createJob(def dslFactory) {
         dslFactory.pipelineJob(this.name) {
             description(this.description)
 
