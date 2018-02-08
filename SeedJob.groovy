@@ -17,15 +17,16 @@ job('SeedJob') {
         dsl {
             external('SeedJob.groovy')
             removeAction('DELETE')
+            additionalClasspath 'jobs/*'
         }
     }
 }
 
-ArchitecturePipelineJob.createJob(this)
+jobs.ArchitecturePipelineJob.createJob(this)
 
-DSLPluginSnapshotJob.createJob(this)
-ArchitectureSnapshotJob.createJob(this)
-ComponentsSnapshotJob.createJob(this)
-ReferenceAppSnapshotBuildDeployJob.createJob(this)
+jobs.DSLPluginSnapshotJob.createJob(this)
+jobs.ArchitectureSnapshotJob.createJob(this)
+jobs.ComponentsSnapshotJob.createJob(this)
+jobs.ReferenceAppSnapshotBuildDeployJob.createJob(this)
 
-ComponentsPipelineTriggerJob.createJob(this)
+jobs.ComponentsPipelineTriggerJob.createJob(this)
