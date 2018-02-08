@@ -11,7 +11,7 @@ public class ArchitecturePipelineJob {
             description: 'Pipeline Job for the hps apf architecture pipeline',
             githubOwnerRepo: 'LasterSlaster/jenkins2-test',
             credentialID: 'ID',
-            scriptPath: 'pipelines/ArchitecturePipeline'
+            scriptPath: 'pipelines/ArchitecturePipeline.groovy'
             ).createJob(dslFactory)
         def configuredPipelineJob = new ConfigPipelineJob().createJob(pipelineJob)
     }

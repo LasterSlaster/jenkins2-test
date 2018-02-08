@@ -11,7 +11,7 @@ public class ReferenceAppSnapshotBuildDeployJob {
             description: 'Pipeline Job for the ReferenceApp snapshot build',
             githubOwnerRepo: 'LasterSlaster/jenkins2-test',
             credentialID: 'ID',
-            scriptPath: 'pipelineBuilds/ReferenceAppSnapshotBuildDeploy'
+            scriptPath: 'pipelineBuilds/ReferenceAppSnapshotBuildDeploy.groovy'
             ).createJob(dslFactory)
             
         def configuredPipelineJob = new ConfigPipelineJob().createJob(pipelineJob)

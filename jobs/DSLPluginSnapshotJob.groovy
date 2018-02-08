@@ -11,7 +11,7 @@ public class DSLPluginSnapshotJob {
             description: 'Pipeline Job for the DSL plugin snapshot build',
             githubOwnerRepo: 'LasterSlaster/jenkins2-test',
             credentialID: 'ID',
-            scriptPath: 'pipelineBuilds/DSLPluginSnapshot'
+            scriptPath: 'pipelineBuilds/DSLPluginSnapshot.groovy'
             ).createJob(dslFactory)
             
         def configuredPipelineJob = new ConfigPipelineJob().createJob(pipelineJob)

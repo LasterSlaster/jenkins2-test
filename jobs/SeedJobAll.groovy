@@ -124,7 +124,7 @@ public class ArchitectureSnapshotJob {
             description: 'Pipeline Job for the architecture snapshot build',
             githubOwnerRepo: 'LasterSlaster/jenkins2-test',
             credentialID: 'ID',
-            scriptPath: 'pipelineBuilds/ArchitectureSnapshot'
+            scriptPath: 'pipelineBuilds/ArchitectureSnapshot.groovy'
             ).createJob(dslFactory)
             
         def configuredPipelineJob = new ConfigPipelineJob().createJob(pipelineJob)
@@ -139,7 +139,7 @@ public class ComponentsSnapshotJob {
             description: 'Pipeline Job for the components snapshot build',
             githubOwnerRepo: 'LasterSlaster/jenkins2-test',
             credentialID: 'ID',
-            scriptPath: 'pipelineBuilds/ComponentsSnapshot'
+            scriptPath: 'pipelineBuilds/ComponentsSnapshot.groovy'
             ).createJob(dslFactory)
             
         def configuredPipelineJob = new ConfigPipelineJob().createJob(pipelineJob)
@@ -154,7 +154,7 @@ public class DSLPluginSnapshotJob {
             description: 'Pipeline Job for the DSL plugin snapshot build',
             githubOwnerRepo: 'LasterSlaster/jenkins2-test',
             credentialID: 'ID',
-            scriptPath: 'pipelineBuilds/DSLPluginSnapshot'
+            scriptPath: 'pipelineBuilds/DSLPluginSnapshot.groovy'
             ).createJob(dslFactory)
             
         def configuredPipelineJob = new ConfigPipelineJob().createJob(pipelineJob)
@@ -169,7 +169,7 @@ public class ReferenceAppSnapshotBuildDeployJob {
             description: 'Pipeline Job for the ReferenceApp snapshot build',
             githubOwnerRepo: 'LasterSlaster/jenkins2-test',
             credentialID: 'ID',
-            scriptPath: 'pipelineBuilds/ReferenceAppSnapshotBuildDeploy'
+            scriptPath: 'pipelineBuilds/ReferenceAppSnapshotBuildDeploy.groovy'
             ).createJob(dslFactory)
             
         def configuredPipelineJob = new ConfigPipelineJob().createJob(pipelineJob)
@@ -184,7 +184,7 @@ public class ArchitecturePipelineJob {
             description: 'Pipeline Job for the hps apf architecture pipeline',
             githubOwnerRepo: 'LasterSlaster/jenkins2-test',
             credentialID: 'ID',
-            scriptPath: 'pipelines/ArchitecturePipeline'
+            scriptPath: 'pipelines/ArchitecturePipeline.groovy'
             ).createJob(dslFactory)
         def configuredPipelineJob = new ConfigPipelineJob().createJob(pipelineJob)
     }

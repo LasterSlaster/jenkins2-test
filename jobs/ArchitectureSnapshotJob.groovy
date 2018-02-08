@@ -11,7 +11,7 @@ public class ArchitectureSnapshotJob {
             description: 'Pipeline Job for the architecture snapshot build',
             githubOwnerRepo: 'LasterSlaster/jenkins2-test',
             credentialID: 'ID',
-            scriptPath: 'pipelineBuilds/ArchitectureSnapshot'
+            scriptPath: 'pipelineBuilds/ArchitectureSnapshot.groovy'
             ).createJob(dslFactory)
             
         def configuredPipelineJob = new ConfigPipelineJob().createJob(pipelineJob)
