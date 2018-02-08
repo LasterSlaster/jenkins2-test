@@ -2,7 +2,7 @@ package jobs
 
 import javaposse.jobdsl.dsl.Job
 
-public class ArchitecturePipelineJob {
+public class BasePipelineJob {
 
     String name
     String description

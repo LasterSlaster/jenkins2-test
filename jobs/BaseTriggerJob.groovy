@@ -2,7 +2,7 @@ package jobs
 
 import javaposse.jobdsl.dsl.Job
 
-public class ComponentsPipelineTriggerJob {
+public class BaseTriggerJob {
 
     String name
     String githubOwnerRepo
