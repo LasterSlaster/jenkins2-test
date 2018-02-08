@@ -1,3 +1,5 @@
+package jobs
+
 import javaposse.jobdsl.dsl.Job
 
 public class ComponentsPipelineTriggerJob {

@@ -1,3 +1,8 @@
+package jobs
+
+import javaposse.jobdsl.dsl.Job
+import jobs.ConfigJob
+
 public class ComponentsPipelineTriggerJob {
 
     static void createJob(def dslFactory) {

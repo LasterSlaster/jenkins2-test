@@ -1,5 +1,8 @@
 package main.jobs
+package jobs
+
 import javaposse.jobdsl.dsl.Job
+import jobs.ConfigPipelineJob
 
 public class ArchitecturePipelineJob {
 
