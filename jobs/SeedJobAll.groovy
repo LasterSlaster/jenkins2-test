@@ -41,7 +41,7 @@ public class BaseTriggerJob {
     String githubOwnerRepo
     String credentialID
     String triggerPipeline
-    int stage
+    String stage
 
     Job createJob(def dslFactory) {
         def triggerJob = dslFactory.job(this.name) {
@@ -110,7 +110,7 @@ public class ComponentsPipelineTriggerJob {
             githubOwnerRepo: 'LasterSlaster/jenkins2-test',
             credentialID: 'ID',
             triggerPipeline: 'Architecture Pipeline',
-            stage: 2
+            stage: '2'
             ).createJob(dslFactory)
         def configuredTriggerJob = new ConfigJob().createJob(baseTriggerJob)
     }
