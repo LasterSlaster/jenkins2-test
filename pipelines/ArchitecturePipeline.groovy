@@ -44,6 +44,7 @@ def prepareStages(def startPoint){
     steps.each{
         step ->
             if (step.id >= startPoint.id) {
+                echo ('DEBUG: Adding stage ' + step)
                 finalSteps.add(step)
             }
     }
@@ -57,6 +58,8 @@ node {
     def archResult
     def compResult
     def refAppResult
+
+    echo "INFO: Starting with stage ${startStage}"
 
     stage('DSL Plugin Build') {
         if (stages.contains(Steps.DLS_BUILD)) {

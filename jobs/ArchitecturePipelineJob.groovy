@@ -13,6 +13,13 @@ public class ArchitecturePipelineJob {
             credentialID: 'ID',
             scriptPath: 'pipelines/ArchitecturePipeline.groovy'
             ).createJob(dslFactory)
+        
         def configuredPipelineJob = new ConfigPipelineJob().createJob(pipelineJob)
+        
+        configuredPipelineJob.with {
+            parameters {
+                stringParam('startStage', '0', 'Set the stage to start the pipeline with. Possible values: \n 0 : JobDSL Plugin Snapshot\n 1 : Architecture Snapshot\n 2 : Components Snapshot\n 3 : ReferenceApp build deploy')
+            }
+        }
     }
 }
