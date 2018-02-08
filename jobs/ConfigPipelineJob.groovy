@@ -2,7 +2,7 @@ package jobs
 
 import javaposse.jobdsl.dsl.Job
 
-public class ConfigJob {
+public class ConfigPipelineJob {
 
     Job createJob (def factory) {
         factory. with{
