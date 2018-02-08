@@ -1,6 +1,6 @@
 package main
 
-node('any') {
+node {
     timestamps {
         currentBuild.result = 'SUCCESS'
         checkout([$class: 'GitSCM', branches: [[name: 'refs/heads/master']], browser: [$class: 'GitWeb', repoUrl: '/usr/share/gitweb'], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'myID', url: 'http://172.31.22.80/gitweb/hpsapf-referenceapplication.git']]])

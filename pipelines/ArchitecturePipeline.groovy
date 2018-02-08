@@ -52,7 +52,7 @@ def prepareStages(def startPoint){
 
 def stages = prepareStages(Steps.getByName("${startStage}"))
 
-node('any') {
+node {
     def dslResult
     def archResult
     def compResult

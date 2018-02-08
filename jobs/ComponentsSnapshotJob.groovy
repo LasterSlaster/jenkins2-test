@@ -7,10 +7,10 @@ public class ComponentsSnapshotJob {
 
     static void createJob(def dslFactory) {
          def pipelineJob = new BasePipelineJob(
-            name: '03. H&PS APF Components Snapshot'
-            description: 'Pipeline Job for the components snapshot build'
-            githubOwnerRepo: 'LasterSlaster/jenkins2-test'
-            credentialID: 'ID'
+            name: '03. HPS APF Components Snapshot',
+            description: 'Pipeline Job for the components snapshot build',
+            githubOwnerRepo: 'LasterSlaster/jenkins2-test',
+            credentialID: 'ID',
             scriptPath: 'pipelineBuilds/ComponentsSnapshot'
             ).createJob(dslFactory)
             

@@ -17,7 +17,6 @@ job('SeedJob') {
         dsl {
             external('jobs/SeedJob.groovy')
             removeAction('DELETE')
-            additionalClasspath 'jobs/*'
         }
     }
 }

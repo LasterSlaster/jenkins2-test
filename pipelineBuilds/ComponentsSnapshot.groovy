@@ -1,6 +1,6 @@
 package main
 
-node('any') {
+node {
     timestamps {
         try {
             currentBuild.result = 'SUCCESS'
