@@ -1,4 +1,4 @@
-package main
+package pipelines
 //TODO: Create Configuratble BasePipeline Script
 enum Steps {
     DLS_BUILD(0, 'DSL Plugin Build'),
@@ -23,7 +23,7 @@ enum Steps {
     }
 
     public static Steps getByName(String name) {
-        println "getting by name " + name
+        echo "getting by name " + name
         for(Steps step : Steps.values()) {
             if(step.name.equalsIgnoreCase(name)) {
                 return step
@@ -34,7 +34,7 @@ enum Steps {
 }
 
 def prepareStages(def startPoint){
-    println "preparing build steps starting from " + startPoint
+    echo "INFO: Preparing build steps starting from " + startPoint
     Set steps = new LinkedHashSet()
     steps.add(Steps.DLS_BUILD)
     steps.add(Steps.ARCH_BUILD)
@@ -58,8 +58,6 @@ node {
     def archResult
     def compResult
     def refAppResult
-
-    echo "INFO: Starting with stage ${startStage}"
 
     stage('DSL Plugin Build') {
         if (stages.contains(Steps.DLS_BUILD)) {
