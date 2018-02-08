@@ -1,4 +1,5 @@
 import javaposse.jobdsl.dsl.Job
+import jobs.*
 
 job('SeedJob') {
     concurrentBuild(false)
