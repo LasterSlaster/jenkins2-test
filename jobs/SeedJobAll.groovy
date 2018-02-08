@@ -120,7 +120,7 @@ public class ArchitectureSnapshotJob {
 
     static void createJob(def dslFactory) {
         def pipelineJob = new BasePipelineJob(
-            name: '02. H\&PS APF Architecture Snapshot',
+            name: '02. H\\&PS APF Architecture Snapshot',
             description: 'Pipeline Job for the architecture snapshot build',
             githubOwnerRepo: 'LasterSlaster/jenkins2-test',
             credentialID: 'ID',
@@ -135,7 +135,7 @@ public class ComponentsSnapshotJob {
 
     static void createJob(def dslFactory) {
          def pipelineJob = new BasePipelineJob(
-            name: '03. H\&PS APF Components Snapshot',
+            name: '03. H\\&PS APF Components Snapshot',
             description: 'Pipeline Job for the components snapshot build',
             githubOwnerRepo: 'LasterSlaster/jenkins2-test',
             credentialID: 'ID',
@@ -150,7 +150,7 @@ public class DSLPluginSnapshotJob {
 
     static void createJob(def dslFactory) {
          def pipelineJob = new BasePipelineJob(
-            name: '01. H\&PS APF DSL Plugins Snapshot',
+            name: '01. H\\&PS APF DSL Plugins Snapshot',
             description: 'Pipeline Job for the DSL plugin snapshot build',
             githubOwnerRepo: 'LasterSlaster/jenkins2-test',
             credentialID: 'ID',
@@ -165,7 +165,7 @@ public class ReferenceAppSnapshotBuildDeployJob {
 
     static void createJob(def dslFactory) {
            def pipelineJob = new BasePipelineJob(
-            name: '6. H\&PS APF ReferenceApp Snapshot Build Deploy',
+            name: '6. H\\&PS APF ReferenceApp Snapshot Build Deploy',
             description: 'Pipeline Job for the ReferenceApp snapshot build',
             githubOwnerRepo: 'LasterSlaster/jenkins2-test',
             credentialID: 'ID',
