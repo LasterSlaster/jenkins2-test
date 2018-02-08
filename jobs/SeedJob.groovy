@@ -1,16 +1,12 @@
-package main.jobs
-
 import javaposse.jobdsl.dsl.Job
-import main.ArchitectureSnapshot
 
 job('SeedJob') {
     concurrentBuild(false)
     scm {
         git {
             remote {
-                //TODO: Add parameters
-                github('')
-                credentials('')
+                github('LasterSlaster/jenkins2-test')
+                credentials('ID')
             }
         }
     }

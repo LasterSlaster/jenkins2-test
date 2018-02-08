@@ -10,10 +10,6 @@ public class ConfigJob {
             triggers {
                 cron('H/5 * * * *')
             }
-            wrappers {
-                timestamps()
-                preBuildCleanup()
-            }
         }
     }
 }

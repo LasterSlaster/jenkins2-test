@@ -1,28 +1,13 @@
-package main.jobs
-
-//TODO: Create Configurable Trigger Job
 public class ComponentsPipelineTriggerJob {
 
     static void createJob(def dslFactory) {
-        dslFactory.job('ComponentsPipelineTriggerJob') {
-            scm {
-                git {
-                    name('Components')
-                    url('http://172.31.22.80/gitweb/hpsapf-components.git')
-                }
-            }
-            triggers {
-                cron('H/5 * * * *')
-            }
-            publishers {
-                downstreamParameterized {
-                    trigger('Architecture Pipeline') {
-                        parameters {
-                            predefinedProp('stage', '2')
-                        }
-                    }
-                }
-            }
-        }
+        def baseTriggerJob = new BaseTriggerJob(
+            name: 'ComponentsPipelineTriggerJob'
+            githubOwnerRepo: 'LasterSlaster/jenkins2-test'
+            credentialID: 'ID'
+            triggerPipeline: 'Architecture Pipeline'
+            stage: 2
+            ).createJob(dslFactory)
+        def configuredTriggerJob = new ConfigJob().createJob(baseTriggerJob)
     }
 }
