@@ -106,10 +106,10 @@ public class ComponentsPipelineTriggerJob {
 
     static void createJob(def dslFactory) {
         def baseTriggerJob = new BaseTriggerJob(
-            name: 'ComponentsPipelineTriggerJob'
-            githubOwnerRepo: 'LasterSlaster/jenkins2-test'
-            credentialID: 'ID'
-            triggerPipeline: 'Architecture Pipeline'
+            name: 'ComponentsPipelineTriggerJob',
+            githubOwnerRepo: 'LasterSlaster/jenkins2-test',
+            credentialID: 'ID',
+            triggerPipeline: 'Architecture Pipeline',
             stage: 2
             ).createJob(dslFactory)
         def configuredTriggerJob = new ConfigJob().createJob(baseTriggerJob)
@@ -120,13 +120,72 @@ public class ArchitectureSnapshotJob {
 
     static void createJob(def dslFactory) {
         def pipelineJob = new BasePipelineJob(
-            name: '02. H&PS APF Architecture Snapshot'
-            description: 'Pipeline Job for the architecture snapshot build'
-            githubOwnerRepo: 'LasterSlaster/jenkins2-test'
-            credentialID: 'ID'
+            name: '02. H&PS APF Architecture Snapshot',
+            description: 'Pipeline Job for the architecture snapshot build',
+            githubOwnerRepo: 'LasterSlaster/jenkins2-test',
+            credentialID: 'ID',
             scriptPath: 'pipelineBuilds/ArchitectureSnapshot'
             ).createJob(dslFactory)
             
+        def configuredPipelineJob = new ConfigPipelineJob().createJob(pipelineJob)
+    }
+}
+
+public class ComponentsSnapshotJob {
+
+    static void createJob(def dslFactory) {
+         def pipelineJob = new BasePipelineJob(
+            name: '03. H&PS APF Components Snapshot',
+            description: 'Pipeline Job for the components snapshot build',
+            githubOwnerRepo: 'LasterSlaster/jenkins2-test',
+            credentialID: 'ID',
+            scriptPath: 'pipelineBuilds/ComponentsSnapshot'
+            ).createJob(dslFactory)
+            
+        def configuredPipelineJob = new ConfigPipelineJob().createJob(pipelineJob)
+    }
+}
+
+public class DSLPluginSnapshotJob {
+
+    static void createJob(def dslFactory) {
+         def pipelineJob = new BasePipelineJob(
+            name: '01. H&PS APF DSL Plugins Snapshot',
+            description: 'Pipeline Job for the DSL plugin snapshot build',
+            githubOwnerRepo: 'LasterSlaster/jenkins2-test',
+            credentialID: 'ID',
+            scriptPath: 'pipelineBuilds/DSLPluginSnapshot'
+            ).createJob(dslFactory)
+            
+        def configuredPipelineJob = new ConfigPipelineJob().createJob(pipelineJob)
+    }
+}
+
+public class ReferenceAppSnapshotBuildDeployJob {
+
+    static void createJob(def dslFactory) {
+           def pipelineJob = new BasePipelineJob(
+            name: '6. H&PS APF ReferenceApp Snapshot Build Deploy',
+            description: 'Pipeline Job for the ReferenceApp snapshot build',
+            githubOwnerRepo: 'LasterSlaster/jenkins2-test',
+            credentialID: 'ID',
+            scriptPath: 'pipelineBuilds/ReferenceAppSnapshotBuildDeploy'
+            ).createJob(dslFactory)
+            
+        def configuredPipelineJob = new ConfigPipelineJob().createJob(pipelineJob)
+    }
+}
+
+public class ArchitecturePipelineJob {
+
+    static void createJob(def dslFactory) {
+        def pipelineJob = new BasePipelineJob(
+            name: 'Architecture Pipeline',
+            description: 'Pipeline Job for the hps apf architecture pipeline',
+            githubOwnerRepo: 'LasterSlaster/jenkins2-test',
+            credentialID: 'ID',
+            scriptPath: 'pipelines/ArchitecturePipeline'
+            ).createJob(dslFactory)
         def configuredPipelineJob = new ConfigPipelineJob().createJob(pipelineJob)
     }
 }
@@ -150,64 +209,6 @@ job('SeedJob') {
     }
 }
 
-public class ComponentsSnapshotJob {
-
-    static void createJob(def dslFactory) {
-         def pipelineJob = new BasePipelineJob(
-            name: '03. H&PS APF Components Snapshot'
-            description: 'Pipeline Job for the components snapshot build'
-            githubOwnerRepo: 'LasterSlaster/jenkins2-test'
-            credentialID: 'ID'
-            scriptPath: 'pipelineBuilds/ComponentsSnapshot'
-            ).createJob(dslFactory)
-            
-        def configuredPipelineJob = new ConfigPipelineJob().createJob(pipelineJob)
-    }
-}
-
-public class DSLPluginSnapshotJob {
-
-    static void createJob(def dslFactory) {
-         def pipelineJob = new BasePipelineJob(
-            name: '01. H&PS APF DSL Plugins Snapshot'
-            description: 'Pipeline Job for the DSL plugin snapshot build'
-            githubOwnerRepo: 'LasterSlaster/jenkins2-test'
-            credentialID: 'ID'
-            scriptPath: 'pipelineBuilds/DSLPluginSnapshot'
-            ).createJob(dslFactory)
-            
-        def configuredPipelineJob = new ConfigPipelineJob().createJob(pipelineJob)
-    }
-}
-
-public class ReferenceAppSnapshotBuildDeployJob {
-
-    static void createJob(def dslFactory) {
-           def pipelineJob = new BasePipelineJob(
-            name: '6. H&PS APF ReferenceApp Snapshot Build Deploy'
-            description: 'Pipeline Job for the ReferenceApp snapshot build'
-            githubOwnerRepo: 'LasterSlaster/jenkins2-test'
-            credentialID: 'ID'
-            scriptPath: 'pipelineBuilds/ReferenceAppSnapshotBuildDeploy'
-            ).createJob(dslFactory)
-            
-        def configuredPipelineJob = new ConfigPipelineJob().createJob(pipelineJob)
-    }
-}
-
-public class ArchitecturePipelineJob {
-
-    static void createJob(def dslFactory) {
-        def pipelineJob = new BasePipelineJob(
-            name: 'Architecture Pipeline'
-            description: 'Pipeline Job for the hps apf architecture pipeline'
-            githubOwnerRepo: 'LasterSlaster/jenkins2-test'
-            credentialID: 'ID'
-            scriptPath: 'pipelines/ArchitecturePipeline'
-            ).createJob(dslFactory)
-        def configuredPipelineJob = new ConfigPipelineJob().createJob(pipelineJob)
-    }
-}
 
 ArchitecturePipelineJob.createJob(this)
 
