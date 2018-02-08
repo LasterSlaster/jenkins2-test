@@ -202,7 +202,7 @@ job('SeedJob') {
     }
     steps {
         dsl {
-            external('jobs/SeedJob.groovy')
+            external('jobs/SeedJobAll.groovy')
             removeAction('DELETE')
         }
     }
