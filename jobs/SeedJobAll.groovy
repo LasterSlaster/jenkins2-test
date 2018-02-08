@@ -45,7 +45,7 @@ public class BaseTriggerJob {
 
     Job createJob(def dslFactory) {
         def triggerJob = dslFactory.job(this.name) {
-            description('Job to watch the repository ' + this.githubOwnerRepo + ' and trigger the pipeline ' + this.triggerPipeline ' at stage ' + this.stage)
+            description('Job to watch the repository ' + this.githubOwnerRepo + ' and trigger the pipeline ' + this.triggerPipeline + ' at stage ' + this.stage)
             scm {
                 git {
                     remote {
