@@ -11,24 +11,12 @@ node {
                 echo 'INFO: Executing maven build'
                 try {
                     withMaven {
-                        //Parent POM location com.accenture.hpsapf.dsl.parent/pom.xml
                         sh "mvn clean deploy -X -Pjenkins-build -Dfile.encoding=UTF-8 -DaltDeploymentRepository=snapshots::default::http://172.31.22.80:8081/nexus/content/repositories/snapshots/ -B -Dmaven.test.skip=false"
                     }
-                    echo 'INFO: Maven build was SUCCESSFULL'
                 } catch (e) {
-                    echo 'WARNING: Maven build threw exception'
-                } finally {
-                    //TODO: Check the right test result directory
-                    echo 'INFO: Archiving maven artifacts'
-                    step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
-                    step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
-                    if (currentBuild.result == 'UNSTABLE') {
-                        echo 'WARNING: Maven build is UNSTABLE'
-                    } else if (currentBuild.result != 'SUCCESS'){
-                        echo 'WARNING: Maveen build FAILED'
-                        currentBuild.result = 'FAILURE'
-                    }
-                }
+                    echo 'WARNING: Maven build FAILED'
+                    currentBuild.result = 'FAILURE'
+                } 
             }
 
             //Post Steps
@@ -39,7 +27,7 @@ node {
                 echo 'INFO: Setting build name'
                 dir ('com.accenture.hpsapf.dsl.parent') {
                     pom = readMavenPom file: 'pom.xml'
-                    currentBuild.displayName = "$pom.version($env.BUILD_NUMBER)"
+                    currentBuild.displayName = "${pom.version}(${env.BUILD_NUMBER})"
                 }
                 
                 echo 'INFO: Executing shell'
