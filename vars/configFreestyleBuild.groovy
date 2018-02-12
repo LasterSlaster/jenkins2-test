@@ -6,8 +6,8 @@ def call (body) {
 	body.delegate = config
 	body()
 
-	def buildStepsScript = (config.buildStepsScript) ? : {}
-	def postBuildActionsScript = (config.postBuildActionsScript) ? : {}
+	def buildStepsScript = (config.buildStepsScript) ?: {}
+	def postBuildActionsScript = (config.postBuildActionsScript) ?: {}
 	
 	def buildStepsStatus
 	def postBuildActionStatus
