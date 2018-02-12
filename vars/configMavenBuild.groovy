@@ -31,7 +31,9 @@ def call (body) {
 				cleanWs()
 				currentBuild.result = 'SUCCESS'
 
+				echo 'blub'
 				echo 'INFO: Checking-out repository'
+				echo 'bla'
 				checkoutGitRepo(repoURL, credentialsID, branch, browser, browserURL, browserVersion)
 				
 				echo 'INFO: Setting environment variable for pom version'
