@@ -88,6 +88,8 @@ def call (body) {
 			            deployScript()
 			        }
 			    }
+			} catch (e) {
+				error('ERROR: This job ended unexpectedly!\nStack trace:\n' + e)
 			} finally {
 				echo 'INFO: Sending email'
 				emailBuildStatus()

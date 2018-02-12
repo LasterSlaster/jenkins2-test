@@ -24,6 +24,8 @@ def call (body) {
 				buildStepsStatus = executeBuildSteps(buildStepsScript, 'Build steps')
 
 				postBuildActionStatus = executeBuildSteps(postBuildActionsScript, 'Post-build Actions')
+			} catch (e) {
+				error('ERROR: This job ended unexpectedly!\nStack trace:\n' + e)
 			} finally {
 				echo 'INFO: Sending email'
 				emailBuildStatus()
