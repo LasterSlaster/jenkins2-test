@@ -13,7 +13,7 @@ node {
             echo 'INFO: Setting build name'
             dir ('acn-hpsapf-components-parent') {
                 pom = readMavenPom file: 'pom.xml'
-                currentBuild.displayName = "${pom.version}(${env.BUILD_NUMBER})"
+                currentBuild.displayName = '${pom.version}(${env.BUILD_NUMBER})'
 
                 //Invoke top-level Maven targets
                 echo 'INFO: Pre-Steps'
@@ -23,7 +23,7 @@ node {
                 try {
                     withMaven {
                         //Parent POM location com.accenture.hpsapf.dsl.parent/pom.xml
-                        sh "mvn clean deploy -Dmaven.buildmode=ci -Dfile.encoding=UTF-8 -DaltDeploymentRepository=snapshots::default::http://172.31.22.80:8081/nexus/content/repositories/snapshots/ -B -X"
+                        sh 'mvn clean deploy -Dmaven.buildmode=ci -Dfile.encoding=UTF-8 -DaltDeploymentRepository=snapshots::default::http://172.31.22.80:8081/nexus/content/repositories/snapshots/ -B -X'
                     }
                 } catch (e) {
                     echo 'Pre Steps FAILED'
@@ -35,7 +35,7 @@ node {
                     echo 'INFO: Executing Maven build'
                     withMaven {
                         //Parent POM location com.accenture.hpsapf.dsl.parent/pom.xml
-                        sh "mvn clean deploy -Dmaven.buildmode=ci -Dfile.encoding=UTF-8 -DaltDeploymentRepository=snapshots::default::http://172.31.22.80:8081/nexus/content/repositories/snapshots/ -B -X"
+                        sh 'mvn clean deploy -Dmaven.buildmode=ci -Dfile.encoding=UTF-8 -DaltDeploymentRepository=snapshots::default::http://172.31.22.80:8081/nexus/content/repositories/snapshots/ -B -X'
                     }
                 } catch (e) {
                     echo 'WARNING: Maven build FAILED'
@@ -48,12 +48,12 @@ node {
                     echo 'INFO: Executing Maven deploy'
                     withMaven {
                         //Parent POM location com.accenture.hpsapf.dsl.parent/pom.xml
-                        sh "mvn clean deploy -Dmaven.buildmode=ci -Dfile.encoding=UTF-8 -DaltDeploymentRepository=snapshots::default::http://172.31.22.80:8081/nexus/content/repositories/snapshots/ -B -X"
+                        sh 'mvn clean deploy -Dmaven.buildmode=ci -Dfile.encoding=UTF-8 -DaltDeploymentRepository=snapshots::default::http://172.31.22.80:8081/nexus/content/repositories/snapshots/ -B -X'
                     }
                     echo 'INFO: Executing Maven sonar check'
                     withMaven {
                         //Parent POM location com.accenture.hpsapf.dsl.parent/pom.xml
-                        sh "mvn sonar:sonar -B"
+                        sh 'mvn sonar:sonar -B'
                     }
                 }
             }

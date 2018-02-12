@@ -12,7 +12,7 @@ node {
                 echo 'INFO: Executing maven build'
                 try {
                     withMaven {
-                         sh "mvn clean deploy -Dmaven.buildmode=ci -DaltDeploymentRepository=snapshots::default::http://172.31.22.80:8081/nexus/content/repositories/snapshots/ -B"
+                         sh 'mvn clean deploy -Dmaven.buildmode=ci -DaltDeploymentRepository=snapshots::default::http://172.31.22.80:8081/nexus/content/repositories/snapshots/ -B'
                     }
                 } catch (e) {
                     echo 'WARNING: Maven build FAILED'
@@ -22,10 +22,10 @@ node {
                 //Post Steps 
                 echo 'INFO: Setting build name'
                 pom = readMavenPom file: 'pom.xml'
-                currentBuild.displayName = "${pom.version}(${env.BUILD_NUMBER})"
+                currentBuild.displayName = '${pom.version}(${env.BUILD_NUMBER})'
                 echo 'INFO: Executing sonar check'
                 withMaven {
-                    sh "mvn sonar:sonar -B"
+                    sh 'mvn sonar:sonar -B'
                 }
             }
         }

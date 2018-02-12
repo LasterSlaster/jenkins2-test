@@ -13,7 +13,7 @@ node {
                 echo 'INFO: Executing Maven build'
                 withMaven {
                     //Parent POM location com.accenture.hpsapf.dsl.parent/pom.xml
-                    sh "mvn clean deploy -X -Dmaven.buildmode=ci -Dfile.encoding=UTF-8 -DaltDeploymentRepository=snapshots::default::http://172.31.22.80:8081/nexus/content/repositories/snapshots/ -B -DdeployRepoUrl=http://172.31.22.80:8081/nexus/content/repositories/snapshots/ -DdeployRepo=snapshots"
+                    sh 'mvn clean deploy -X -Dmaven.buildmode=ci -Dfile.encoding=UTF-8 -DaltDeploymentRepository=snapshots::default::http://172.31.22.80:8081/nexus/content/repositories/snapshots/ -B -DdeployRepoUrl=http://172.31.22.80:8081/nexus/content/repositories/snapshots/ -DdeployRepo=snapshots'
                 }
             } catch (e) {
                 echo 'WARNING: Maven build FAILED'
@@ -26,13 +26,13 @@ node {
             dir ('acn-hpsapf-referenceapplication-parent') {
                 echo 'INFO: Setting build name'
                 pom = readMavenPom file: 'pom.xml'
-                currentBuild.displayName = "${pom.version}(${env.BUILD_NUMBER})"
+                currentBuild.displayName = '${pom.version}(${env.BUILD_NUMBER})'
             
                 try {
                     echo 'INFO: Executing Maven sonar check'
                     withMaven {
                         //Parent POM location com.accenture.hpsapf.dsl.parent/pom.xml
-                        sh "mvn sonar:sonar -B"
+                        sh 'mvn sonar:sonar -B'
                     }
                 } catch (e) {
                     echo 'WARNING: Maveen sonar FAILED'
@@ -44,7 +44,7 @@ node {
 
             
             echo 'INFO: Triggering job hpsapf-referenceapplication-deployment'
-            def triggeredJobReferenceAppGUI = build job: 'hpsapf-referenceapplication-deployment', parameters: [text(name: 'Version', value: "$pom.version"), text(name: 'ArtifactId', value: 'accenture-hpsapf-referenceapplication-gui'), text(name: 'GroupId', value: 'com.accenture.hpsapf'), text(name: 'Stage', value: 'development'), text(name: 'Repository', value: 'snapshots'), text(name: 'ApplicationType', value: 'Gui')], propagate: false
+            def triggeredJobReferenceAppGUI = build job: 'hpsapf-referenceapplication-deployment', parameters: [text(name: 'Version', value: '$pom.version'), text(name: 'ArtifactId', value: 'accenture-hpsapf-referenceapplication-gui'), text(name: 'GroupId', value: 'com.accenture.hpsapf'), text(name: 'Stage', value: 'development'), text(name: 'Repository', value: 'snapshots'), text(name: 'ApplicationType', value: 'Gui')], propagate: false
             
             if (triggeredJobReferenceAppGUI.result == 'FAILURE') {
                 currentBuild.result = 'FAILURE'
@@ -57,7 +57,7 @@ node {
             
             
             echo 'INFO: Triggering job hpsapf-referenceapplication-deployment'
-            def triggeredJobReferenceAppWebservices = build job: 'hpsapf-referenceapplication-deployment', parameters: [text(name: 'Version', value: "$pom.version"), text(name: 'ArtifactId', value: 'accenture-hpsapf-masterdatamanagement-webservices'), text(name: 'GroupId', value: 'com.accenture.hpsapf'), text(name: 'Stage', value: 'development'), text(name: 'Repository', value: 'snapshots'), text(name: 'ApplicationType', value: 'Webservice')], propagate: false
+            def triggeredJobReferenceAppWebservices = build job: 'hpsapf-referenceapplication-deployment', parameters: [text(name: 'Version', value: '$pom.version'), text(name: 'ArtifactId', value: 'accenture-hpsapf-masterdatamanagement-webservices'), text(name: 'GroupId', value: 'com.accenture.hpsapf'), text(name: 'Stage', value: 'development'), text(name: 'Repository', value: 'snapshots'), text(name: 'ApplicationType', value: 'Webservice')], propagate: false
         
             if (triggeredJobReferenceAppWebservices.result == 'FAILURE') {
                 currentBuild.result = 'FAILURE'
@@ -69,7 +69,7 @@ node {
             
             
             echo 'INFO: Triggering job hpsapf referenceapp batches linux deploy'
-            def triggeredJobReferenceAppBatchesLinux = build job: 'hpsapf referenceapp batches linux deploy', parameters: [text(name: 'Version', value: "$pom.version"), text(name: 'Stage', value: 'development'), text(name: 'Repository', value: 'snapshots'), text(name: 'BuildMode', value: 'snapshot'), text(name: 'ApplicationType', value: 'Batch')], propagate: false
+            def triggeredJobReferenceAppBatchesLinux = build job: 'hpsapf referenceapp batches linux deploy', parameters: [text(name: 'Version', value: '$pom.version'), text(name: 'Stage', value: 'development'), text(name: 'Repository', value: 'snapshots'), text(name: 'BuildMode', value: 'snapshot'), text(name: 'ApplicationType', value: 'Batch')], propagate: false
         
             if (triggeredJobReferenceAppBatchesLinux.result == 'FAILURE') {
                 currentBuild.result = 'FAILURE'
@@ -81,7 +81,7 @@ node {
             
             
             echo 'INFO: Triggering job hpsapf referenceapp batches windows deploy'
-            def triggeredJobReferenceAppBatchesWindows = build job: 'hpsapf referenceapp batches windows deploy', parameters: [text(name: 'Version', value: "$pom.version"), text(name: 'Stage', value: 'development'), text(name: 'Repository', value: 'snapshots'), text(name: 'BuildMode', value: 'snapshot'), text(name: 'ApplicationType', value: 'Batch')], propagate: false
+            def triggeredJobReferenceAppBatchesWindows = build job: 'hpsapf referenceapp batches windows deploy', parameters: [text(name: 'Version', value: '$pom.version'), text(name: 'Stage', value: 'development'), text(name: 'Repository', value: 'snapshots'), text(name: 'BuildMode', value: 'snapshot'), text(name: 'ApplicationType', value: 'Batch')], propagate: false
         
             if (triggeredJobReferenceAppBatchesWindows.result == 'FAILURE') {
                 currentBuild.result = 'FAILURE'

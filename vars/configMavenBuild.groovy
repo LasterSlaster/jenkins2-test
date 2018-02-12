@@ -34,6 +34,7 @@ def call (body) {
 				echo 'INFO: Checking-out repository'
 				checkoutGitRepo(repoURL, credentialsID, branch, browser, browserURL, browserVersion)
 				
+				echo 'INFO: Setting environment variable for pom version'
 				env.POM_VERSION = getPOMVersion(pomDir)
 
 				preStepsStatus = executeBuildSteps(preStepsScript, 'Pre Steps')
@@ -46,6 +47,7 @@ def call (body) {
 
 				postBuildActionStatus = executeBuildSteps(postBuildActionsScript, 'Post-build Actions')
 			} catch (e) {
+				echo 'ERROR: This job ended unexpectedly!\nStack trace:\n' + e
 				error('ERROR: This job ended unexpectedly!\nStack trace:\n' + e)
 			} finally {
 				echo 'INFO: Sending email'

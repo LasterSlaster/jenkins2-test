@@ -11,7 +11,7 @@ node {
                 echo 'INFO: Executing maven build'
                 try {
                     withMaven {
-                        sh "mvn clean deploy -X -Pjenkins-build -Dfile.encoding=UTF-8 -DaltDeploymentRepository=snapshots::default::http://172.31.22.80:8081/nexus/content/repositories/snapshots/ -B -Dmaven.test.skip=false"
+                        sh 'mvn clean deploy -X -Pjenkins-build -Dfile.encoding=UTF-8 -DaltDeploymentRepository=snapshots::default::http://172.31.22.80:8081/nexus/content/repositories/snapshots/ -B -Dmaven.test.skip=false'
                     }
                 } catch (e) {
                     echo 'WARNING: Maven build FAILED'

@@ -23,7 +23,7 @@ enum Steps {
     }
 
     public static Steps getByName(String name) {
-        echo "getting by name " + name
+        echo 'getting by name ' + name
         for(Steps step : Steps.values()) {
             if(step.name.equalsIgnoreCase(name)) {
                 return step
@@ -34,7 +34,7 @@ enum Steps {
 }
 
 def prepareStages(def startPoint){
-    echo "INFO: Preparing build steps starting from " + startPoint
+    echo 'INFO: Preparing build steps starting from ' + startPoint
     Set steps = new LinkedHashSet()
     steps.add(Steps.DLS_BUILD)
     steps.add(Steps.ARCH_BUILD)
@@ -51,7 +51,7 @@ def prepareStages(def startPoint){
     return finalSteps
 }
 
-def stages = prepareStages(Steps.getByName("${startStage}"))
+def stages = prepareStages(Steps.getByName(startStage))
 
 node {
     def dslResult
