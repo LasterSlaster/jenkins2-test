@@ -1,4 +1,4 @@
-@Library(ACN_HPS_APF_Library)_
+@Library('ACN_HPS_APF_Library')_
 	
 configMavenBuild {
 
