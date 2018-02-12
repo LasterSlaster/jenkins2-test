@@ -89,6 +89,7 @@ def call (body) {
 			        }
 			    }
 			} catch (e) {
+				echo 'ERROR: This job ended unexpectedly!\nStack trace:\n' + e
 				error('ERROR: This job ended unexpectedly!\nStack trace:\n' + e)
 			} finally {
 				echo 'INFO: Sending email'
