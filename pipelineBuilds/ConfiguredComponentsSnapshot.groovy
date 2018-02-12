@@ -2,7 +2,7 @@
 	
 configMavenBuild {
 
-	def mavenAltDeployRepo = 'snapshots::default::http://172.31.22.80:8081/nexus/content/repositories/snapshots/' //Alternative maven repository for maven build 
+	def mavenOptions = '-Dmaven.buildmode=ci -Dfile.encoding=UTF-8 -DaltDeploymentRepository=snapshots::default::http://172.31.22.80:8081/nexus/content/repositories/snapshots/ -B -X' //Alternative maven repository for maven build 
 	def pomDir = 'acn-hpsapf-components-parent'	// path to the directory of the pom - defaults to '.' [currentWS]
 	def repoURL = 'http://172.31.22.80/gitweb/hpsapf-components.git' // specifies the url to the repository
 	def branch = 'refs/heads/master' // specifies the branch to pull form the repo
@@ -12,16 +12,16 @@ configMavenBuild {
 	def credentialsID = 'myID' // specifies the jenkins id for the repository cedentials
 	def preStepsScript =  {
 		updateBuildName('acn-hpsapf-components-parent')
-		withMavenDeploy('snapshots::default::http://172.31.22.80:8081/nexus/content/repositories/snapshots/', 'accenture-hpsapf-security-jboss-extension', branch, browserURL, browserVersion)
+		withMavenDeploy('-Dmaven.buildmode=ci -Dfile.encoding=UTF-8 -DaltDeploymentRepository=snapshots::default::http://172.31.22.80:8081/nexus/content/repositories/snapshots/ -B -X', 'accenture-hpsapf-security-jboss-extension')
 	} // steps to execute before the maven build
 	def postStepsScript = {
 		if (currentBuild.result == 'SUCCESS') {
-			withMavenDeploy('snapshots::default::http://172.31.22.80:8081/nexus/content/repositories/snapshots/', 'accenture-hpsapf-security-jboss-extension', branch, browserURL, browserVersion)
-			withMavenSonarCheck('acn-hpsapf-components-parent')
+			//TODO: Add settings file and global settings file to maven deploy as in jenkins job
+			withMavenDeploy('-Dmaven.buildmode=ci -Dfile.encoding=UTF-8 -DaltDeploymentRepository=snapshots::default::http://172.31.22.80:8081/nexus/content/repositories/snapshots/ -B -X', 'accenture-hpsapf-security-jboss-extension')
+			withMavenSonarCheck('', 'acn-hpsapf-components-parent')
 		}
 	} // steps to execute after the maven build
 	def postBuildActionsScript = {} // steps to execute after the build process
-
 }
 
 	
