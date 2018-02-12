@@ -65,7 +65,7 @@ def call (body) {
 	node {
 		timestamps {
 			try {
-				cleanWS()
+				cleanWs()
 				currentBuild.result = 'SUCCESS'
 				
 			    stage('Build') {

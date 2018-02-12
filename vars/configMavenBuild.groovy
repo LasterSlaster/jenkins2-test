@@ -28,7 +28,7 @@ def call (body) {
 	node {
 		timestamps {
 			try {	
-				cleanWS()
+				cleanWs()
 				currentBuild.result = 'SUCCESS'
 
 				echo 'INFO: Checking-out repository'
