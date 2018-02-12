@@ -8,17 +8,17 @@ def call (body) {
 	body()
 
 	
-	def mavenOptions = config.mavenOptions ? : ''
-	def pomDir = config.pomDir ? : ''
-	def repoURL = config.repoURL ? : ''	
-	def branch = config.branch ? : ''
-	def browser = config.browser ? : ''
-	def browserURL = config.browserURL ? : ''
-	def browserVersion = config.browserVersion ? : ''
-	def credentialsID	= config.credentialsID ? : ''
-	def preStepsScript = config.preStepsScript ? : {}
-	def postStepsScript = config.postStepsScript ? : {}
-	def postBuildActionsScript = config.postBuildActionsScript ? : {}
+	def mavenOptions = (config.mavenOptions) ? : ''
+	def pomDir = (config.pomDir) ? : ''
+	def repoURL = (config.repoURL) ? : ''	
+	def branch = (config.branch) ? : ''
+	def browser = (config.browser) ? : ''
+	def browserURL = (config.browserURL) ? : ''
+	def browserVersion = (config.browserVersion) ? : ''
+	def credentialsID	= (config.credentialsID) ? : ''
+	def preStepsScript = (config.preStepsScript) ? : {}
+	def postStepsScript = (config.postStepsScript) ? : {}
+	def postBuildActionsScript = (config.postBuildActionsScript) ? : {}
 
 	def preStepsStatus
 	def mavenBuildStatus
