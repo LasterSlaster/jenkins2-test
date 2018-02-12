@@ -6,9 +6,9 @@ def call (body) {
 	body.delegate = config
 	body()
 
-	def buildScript = (config.buildScript) ?: {}
-	def testScript = (config.testScript) ?: {}
-	def deployScript = (config.deployScript) ?: {}
+	def buildScript = config.buildScript ?: {}
+	def testScript = config.testScript ?: {}
+	def deployScript = config.deployScript ?: {}
 
 	enum Steps {
 	    BUILD(0, 'Build'),
