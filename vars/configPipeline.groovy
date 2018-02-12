@@ -32,7 +32,7 @@ def call (body) {
 	    }
 
 	    public static Steps getByName(String name) {
-	        echo "INFO: getting by name " + name
+	        echo 'INFO: getting by name ' + name
 	        for(Steps step : Steps.values()) {
 	            if(step.name.equalsIgnoreCase(name)) {
 	                return step
@@ -43,7 +43,7 @@ def call (body) {
 	}
 
 	def prepareStages(def startPoint){
-	    echo "INFO: Preparing build steps starting from " + startPoint
+	    echo 'INFO: Preparing build steps starting from ' + startPoint
 	    Set steps = new LinkedHashSet()
 	    steps.add(Steps.DLS_BUILD)
 	    steps.add(Steps.ARCH_BUILD)
@@ -60,7 +60,7 @@ def call (body) {
 	    return finalSteps
 	}
 
-	def stages = prepareStages(Steps.getByName("${startStage}"))
+	def stages = prepareStages(Steps.getByName(startStage))
 
 	node {
 		timestamps {
