@@ -1,11 +1,14 @@
+package vars
+
 def call (body) {
 	def config = [:]
 	body.resolveStrategy = Closure.DELEGATE_FIRST
 	body.delegate = config
 	body()
 
-	def buildStepsScript = (config.buildStepsScript == null) ? {} : config.buildStepsScript
-	def postBuildActionsScript = (config.postBuildActionsScript == null) ? {} : config.postBuildActionsScript
+	def buildStepsScript = config.buildStepsScript ? : {}
+	def postBuildActionsScript = config.postBuildActionsScript? : {}
+	
 	def buildStepsStatus
 	def postBuildActionStatus
 

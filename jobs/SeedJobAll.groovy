@@ -124,7 +124,7 @@ public class ArchitectureSnapshotJob {
             description: 'Pipeline Job for the architecture snapshot build',
             githubOwnerRepo: 'LasterSlaster/jenkins2-test',
             credentialID: 'ID',
-            scriptPath: 'pipelineBuilds/ArchitectureSnapshot.groovy'
+            scriptPath: 'pipelineBuilds/ConfiguredArchitectureSnapshot.groovy'
             ).createJob(dslFactory)
             
         def configuredPipelineJob = new ConfigPipelineJob().createJob(pipelineJob)
@@ -139,7 +139,7 @@ public class ComponentsSnapshotJob {
             description: 'Pipeline Job for the components snapshot build',
             githubOwnerRepo: 'LasterSlaster/jenkins2-test',
             credentialID: 'ID',
-            scriptPath: 'pipelineBuilds/ComponentsSnapshot.groovy'
+            scriptPath: 'pipelineBuilds/ConfiguredComponentsSnapshot.groovy'
             ).createJob(dslFactory)
             
         def configuredPipelineJob = new ConfigPipelineJob().createJob(pipelineJob)
@@ -154,7 +154,7 @@ public class DSLPluginSnapshotJob {
             description: 'Pipeline Job for the DSL plugin snapshot build',
             githubOwnerRepo: 'LasterSlaster/jenkins2-test',
             credentialID: 'ID',
-            scriptPath: 'pipelineBuilds/DSLPluginSnapshot.groovy'
+            scriptPath: 'pipelineBuilds/ConfiguredDSLPluginSnapshot.groovy'
             ).createJob(dslFactory)
             
         def configuredPipelineJob = new ConfigPipelineJob().createJob(pipelineJob)
@@ -169,7 +169,7 @@ public class ReferenceAppSnapshotBuildDeployJob {
             description: 'Pipeline Job for the ReferenceApp snapshot build',
             githubOwnerRepo: 'LasterSlaster/jenkins2-test',
             credentialID: 'ID',
-            scriptPath: 'pipelineBuilds/ReferenceAppSnapshotBuildDeploy.groovy'
+            scriptPath: 'pipelineBuilds/ConfiguredReferenceAppSnapshotBuildDeploy.groovy'
             ).createJob(dslFactory)
             
         def configuredPipelineJob = new ConfigPipelineJob().createJob(pipelineJob)

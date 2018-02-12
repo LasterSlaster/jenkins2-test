@@ -1,12 +1,14 @@
+package vars
+
 def call (body) {
 	def config = [:]
 	body.resolveStrategy = Closure.DELEGATE_FIRST
 	body.delegate = config
 	body()
 
-	def buildScript = (config.buildScript == null) ? {} : config.buildScript
-	def testScript = (config.testScript == null) ? {} : config.testScript
-	def deployScript = (config.deployScript == null) ? {} : config.deployScript
+	def buildScript = config.buildScript ? : {}
+	def testScript = config.testScript ? : {}
+	def deployScript = config.deployScript ? : {}
 
 	enum Steps {
 	    BUILD(0, 'Build'),

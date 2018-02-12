@@ -5,6 +5,7 @@ def call (pomDir = './') {
 	}
 
 	echo 'INFO: Setting build name'
-    pom = readMavenPom file: pomDir + 'pom.xml'
-    currentBuild.displayName = "${pom.version}(${env.BUILD_NUMBER})"
+    def pom = readMavenPom file: pomDir + 'pom.xml'
+    env.POM_VERSION = pom.version
+    currentBuild.displayName = "#${pom.version}(${env.BUILD_NUMBER})"
 }

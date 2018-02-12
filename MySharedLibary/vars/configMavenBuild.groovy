@@ -1,3 +1,5 @@
+package vars
+
 def call (body) {
 
 	def config = [:]
@@ -6,14 +8,17 @@ def call (body) {
 	body()
 
 	
-	def mavenAltDeployRepo = (config.mavenAltDeployRepo == null) ? '' :config.mavenAltDeployRepo
-	def pomDir = (config.pomDir == null) ? '' : config.pomDir	
-	def branch = (config.branch == null) ? '' : config.branch
-	def browserURL = (config.browserURL == null) ? '' : config.browserURL
-	def browserVersion = (config.browserVersion == null) ? '' : config.browserVersion
-	def preStepsScript = (config.preStepsScript == null) ? {} : config.preStepsScript
-	def postStepsScript = (config.postStepsScript == null) ? {} : config.postStepsScript
-	def postBuildActionsScript = (config.postBuildActionsScript == null) ? {} : config.postBuildActionsScript
+	def mavenOptions = config.mavenOptions ? : ''
+	def pomDir = config.pomDir ? : ''
+	def repoURL = config.repoURL ? : ''	
+	def branch = config.branch ? : ''
+	def browser = config.browser ? : ''
+	def browserURL = config.browserURL ? : ''
+	def browserVersion = config.browserVersion ? : ''
+	def credentialsID	= config.credentialsID ? : ''
+	def preStepsScript = config.preStepsScript ? : {}
+	def postStepsScript = config.postStepsScript ? : {}
+	def postBuildActionsScript = config.postBuildActionsScript ? : {}
 
 	def preStepsStatus
 	def mavenBuildStatus
@@ -27,12 +32,12 @@ def call (body) {
 				currentBuild.result = 'SUCCESS'
 
 				echo 'INFO: Checking-out repository'
-				checkoutGitRepo(repoURL, credentials, branch)
+				checkoutGitRepo(repoURL, credentialsID, branch, browser, browserURL, browserVersion)
 				
 				preStepsStatus = executeBuildSteps(preStepsScript, 'Pre Steps')
 
 				if (preStepsStatus != 'FAILURE') {
-					mavenBuildStatus = executeBuildSteps({mavenDeploy(mavenAltDeployRepo, pomDir, branch, browserURL, browserVersion)}, 'Maven build')
+					mavenBuildStatus = executeBuildSteps({withMavenDeploy(pomDir, mavenOptions)}, 'Maven build')
 
 					postStepsStatus = executeBuildSteps(postStepsScript, 'Post Steps')
 				}

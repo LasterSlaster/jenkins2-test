@@ -10,6 +10,10 @@ def call(Closure script = {}, String name = 'Step') {
 		def status = currentBuild.result
 		if (status == 'UNSTABLE') {
 			echo 'WARNING: ${name} is UNSTABLE'
+		} else if (currentBuild.result == 'SUCCESS' || currentBuild.result == null) {
+			echo 'INFO: ${name} is SUCCESS'
+			currentBuild.result = 'SUCCEESS'
+			status = 'SUCCESS'
 		}
 		return status
 	}

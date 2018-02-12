@@ -1,8 +1,8 @@
-def call(String pomDir = '.') {
+def call(String pomDir = '.', String options = '') {
 	
 	dir (pomDir) {
 	    withMaven {
-	    	sh "mvn sonar:sonar -B"
+	    	sh "mvn sonar:sonar ${options}"
 	    }
 	}
 }
