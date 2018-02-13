@@ -15,7 +15,7 @@ configMavenBuild {
 	postStepsScript = {
 		if (currentBuild.result == 'SUCCESS' || currentBuild.result == 'UNSTABLE') {
 			updateBuildName('acn-hpsapf-referenceapplication-parent')
-			withMavenSonarCheck('acn-hpsapf-referenceapplication-parent')
+			withMavenSonarCheck('',acn-hpsapf-referenceapplication-parent')
 			triggerParameterizedJob('hpsapf-referenceapplication-deployment-staticcontent', ['Version': env.POM_VERSION, 'ArtifactId': 'accenture-hpsapf-referenceapplication-gui', 'GroupId' : 'com.accenture.hpsapf', 'Stage' : 'developement', 'Repository' : 'snapshots'], false)
 			triggerParameterizedJob('hpsapf-referenceapplication-deployment', ['Version': env.POM_VERSION, 'ArtifactId': 'accenture-hpsapf-referenceapplication-gui', 'GroupId' : 'com.accenture.hpsapf', 'Stage' : 'developement', 'Repository' : 'snapshots', 'ApplicationType' : 'Gui'])
 			triggerParameterizedJob('hpsapf-referenceapplication-deployment', ['Version': env.POM_VERSION, 'ArtifactId': 'accenture-hpsapf-masterdatamanagement-webservices', 'GroupId' : 'com.accenture.hpsapf', 'Stage' : 'developement', 'Repository' : 'snapshots', 'ApplicationType' : 'Webservice'])
