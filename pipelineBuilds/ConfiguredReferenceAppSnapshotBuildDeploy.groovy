@@ -13,10 +13,7 @@ configMavenBuild {
 	browserVersion = '' // specifies the Version for the repo browser gitlab
 	preStepsScript =  {} // steps to execute before the maven build
 	postStepsScript = {
-		echo 'INFO: execute CLosure post steps'
-		echo ' INFO: currentBuild result in closure ' + currentBuild.result 
-		if (this.currentBuild.result == 'SUCCESS' || this.currentBuild.result == 'UNSTABLE') {
-			echo 'closure after if statement'
+		if (currentBuild.result == 'SUCCESS' || currentBuild.result == 'UNSTABLE') {
 			updateBuildName('acn-hpsapf-referenceapplication-parent')
 			withMavenSonarCheck(pomDir)
 			triggerParameterizedJob('hpsapf-referenceapplication-deployment-staticcontent', ['Version': env.POM_VERSION, 'ArtifactId': 'accenture-hpsapf-referenceapplication-gui', 'GroupId' : 'com.accenture.hpsapf', 'Stage' : 'developement', 'Repository' : 'snapshots'], false)
