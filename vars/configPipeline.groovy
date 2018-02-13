@@ -90,14 +90,15 @@ def call (body) {
 			    }
 			} catch (e) {
 				echo 'ERROR: This job ended unexpectedly!\nStack trace:\n' + e
-				error('ERROR: This job ended unexpectedly!\nStack trace:\n' + e)
+				currentBuild.result = 'FAILURE'
+				throw e
 			} finally {
 				echo 'INFO: Sending email'
 				emailBuildStatus()
 				
 				echo '\n'
 				echo '************************************************'
-				echo 'Pipeline ends with status: ' + currentBuild.result
+				echo 'Pipeline ends with current status: ' + currentBuild.result
 				echo '************************************************'
 			}
 		}

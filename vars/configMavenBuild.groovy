@@ -60,7 +60,7 @@ def call (body) {
 				echo 'Maven build status: ' + mavenBuildStatus
 				echo 'Post steps status: ' + postStepsStatus
 				echo 'Post build actions status: ' + postBuildActionStatus
-				echo 'Job ends with status: ' + currentBuild.result
+				echo 'Job ends with current status: ' + currentBuild.result
 				echo '************************************************'
 			}
 		}

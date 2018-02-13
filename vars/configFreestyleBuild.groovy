@@ -35,7 +35,7 @@ def call (body) {
 				echo '************************************************'
 				echo 'Build steps status: ' + buildStepsStatus
 				echo 'Post build actions status: ' + postBuildActionStatus
-				echo 'Job ends with status: ' + currentBuild.result
+				echo 'Job ends with current status: ' + currentBuild.result
 				echo '************************************************'
 			}
 		}
