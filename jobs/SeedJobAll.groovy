@@ -217,3 +217,9 @@ ComponentsSnapshotJob.createJob(this)
 ReferenceAppSnapshotBuildDeployJob.createJob(this)
 
 ComponentsPipelineTriggerJob.createJob(this)
+
+//Empty jobs which get triggered
+job('hpsapf-referenceapplication-deployment-staticcontent')
+job('hpsapf-referenceapplication-deployment')
+jpob('hpsapf referenceapp batches linux deploy')
+job('hpsapf referenceapp batches windows deploy')
