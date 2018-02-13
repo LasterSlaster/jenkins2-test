@@ -40,15 +40,15 @@ def call (body) {
 				echo 'INFO: Setting environment variable for pom version'
 				env.POM_VERSION = getPOMVersion(pomDir)
 
-				preStepsStatus = executeBuildSteps(preStepsScript, 'Pre Steps')
+				preStepsStatus = executeBuildSteps(config.preStepsScript, 'Pre Steps')
 
 				if (preStepsStatus != 'FAILURE') {
 					mavenBuildStatus = executeBuildSteps({withMavenDeploy(pomDir, mavenOptions)}, 'Maven build')
 
-					postStepsStatus = executeBuildSteps(postStepsScript, 'Post Steps')
+					postStepsStatus = executeBuildSteps(config.postStepsScript, 'Post Steps')
 				}
 
-				postBuildActionStatus = executeBuildSteps(postBuildActionsScript, 'Post-build Actions')
+				postBuildActionStatus = executeBuildSteps(config.postBuildActionsScript, 'Post-build Actions')
 			} catch (e) {
 				echo 'ERROR: This job ended unexpectedly!\nStack trace:\n' + e
 				currentBuild.result = 'FAILURE'
