@@ -49,7 +49,8 @@ def call (body) {
 				postBuildActionStatus = executeBuildSteps(postBuildActionsScript, 'Post-build Actions')
 			} catch (e) {
 				echo 'ERROR: This job ended unexpectedly!\nStack trace:\n' + e
-				error('ERROR: This job ended unexpectedly!\nStack trace:\n' + e)
+				currentBuild.result = 'FAILURE'
+				throw e
 			} finally {
 				echo 'INFO: Sending email'
 				emailBuildStatus()
