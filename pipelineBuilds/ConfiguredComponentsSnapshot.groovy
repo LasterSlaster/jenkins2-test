@@ -12,12 +12,12 @@ configMavenBuild {
 	credentialsID = 'myID' // specifies the jenkins id for the repository cedentials
 	preStepsScript =  {
 		updateBuildName('acn-hpsapf-components-parent')
-		withMavenDeploy('-Dmaven.buildmode=ci -Dfile.encoding=UTF-8 -DaltDeploymentRepository=snapshots::default::http://172.31.22.80:8081/nexus/content/repositories/snapshots/ -B -X', 'accenture-hpsapf-security-jboss-extension')
+		withMavenDeploy('-Dmaven.buildmode=ci -Dfile.encoding=UTF-8 -DaltDeploymentRepository=snapshots::default::http://172.31.22.80:8081/nexus/content/repositories/snapshots/ -B -X', 'accenture-hpsapf-security-jboss-extension', 'accenture-hpsapf-security-jboss-extension')
 	} // steps to execute before the maven build
 	postStepsScript = {
 		if (currentBuild.result == 'SUCCESS') {
 			//TODO: Add settings file and global settings file to maven deploy as in jenkins job
-			withMavenDeploy('-Dmaven.buildmode=ci -Dfile.encoding=UTF-8 -DaltDeploymentRepository=snapshots::default::http://172.31.22.80:8081/nexus/content/repositories/snapshots/ -B -X', 'accenture-hpsapf-security-jboss-extension')
+			withMavenDeploy('-Dmaven.buildmode=ci -Dfile.encoding=UTF-8 -DaltDeploymentRepository=snapshots::default::http://172.31.22.80:8081/nexus/content/repositories/snapshots/ -B -X', 'accenture-hpsapf-security-jboss-extension', 'accenture-hpsapf-security-jboss-extension')
 			withMavenSonarCheck('', 'acn-hpsapf-components-parent')
 		}
 	} // steps to execute after the maven build
