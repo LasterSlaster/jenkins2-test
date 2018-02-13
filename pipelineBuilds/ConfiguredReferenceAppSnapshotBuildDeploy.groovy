@@ -13,6 +13,7 @@ configMavenBuild {
 	browserVersion = '' // specifies the Version for the repo browser gitlab
 	preStepsScript =  {} // steps to execute before the maven build
 	postStepsScript = {
+		echo 'INFO: execute CLosure post steps'
 		if (currentBuild.result == 'SUCCESS' || currentBuild.result == 'UNSTABLE') {
 			updateBuildName('acn-hpsapf-referenceapplication-parent')
 			withMavenSonarCheck(pomDir)
