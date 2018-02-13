@@ -15,7 +15,7 @@ def call (body) {
 	def browser = config.browser ?: ''
 	def browserURL = config.browserURL ?: ''
 	def browserVersion = config.browserVersion ?: ''
-	def credentialsID	= config.credentialsID ?: ''
+	def credentialsID = config.credentialsID ?: ''
 	def preStepsScript = config.preStepsScript ?: {}
 	def postStepsScript = config.postStepsScript ?: {}
 	def postBuildActionsScript = config.postBuildActionsScript ?: {}

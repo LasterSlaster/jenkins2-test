@@ -11,7 +11,7 @@ def call(Closure script = {}, String name = 'Step') {
 			echo 'WARNING: ' + name + ' is UNSTABLE'
 		} else if (currentBuild.result == 'SUCCESS' || currentBuild.result == null) {
 			echo 'INFO: ' + name + ' is SUCCESS'
-			currentBuild.result = 'SUCCEESS'
+			currentBuild.result = 'SUCCESS'
 		}
 		return currentBuild.result
 	}
