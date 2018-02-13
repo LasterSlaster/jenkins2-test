@@ -17,7 +17,7 @@ def call (body) {
 	def browserVersion = config.browserVersion ?: ''
 	def credentialsID = config.credentialsID ?: ''
 	def preStepsScript = config.preStepsScript ?: {}
-	def postStepsScript = config.postStepsScript ?: {}
+	//def postStepsScript = config.postStepsScript ?: {}
 	def postBuildActionsScript = config.postBuildActionsScript ?: {}
 
 	echo 'INFO: Job config parameters:\n' + mavenOptions + '\n' + pomDir + '\n' + repoURL + '\n' + branch + '\n' + browser + '\n' + browserURL + '\n' + browserVersion + '\n' + credentialsID
