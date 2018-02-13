@@ -1,7 +1,7 @@
 def call(def jobName, def parameters, def wait = true) {
 
 	def jobStatus
-	def parametersList = parameters.inject([]){list, key, value -> list.add(text(name:key, value: value))}
+	def parametersList = parameters.inject([]){list, key, value -> list << string(name:key, value: value)}
 	echo 'INFO: Triggering job ' + jobName	
    	jobStatus = build job: jobName, parameters: parametersList, wait: wait, propagate: false
     if (jobStatus.result == 'FAILURE') {
