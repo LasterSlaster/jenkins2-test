@@ -18,10 +18,6 @@ def call (body) {
 	def credentialsID = config.credentialsID ?: ''
 	def preStepsScript = config.preStepsScript ?: {}
 	def postStepsScript = config.postStepsScript ?: {}
-	if (config.postStepsScript == null) {
-		echo 'INFO:postStepsScript IIIIIIIIIIISSSSSSSSSSSS NNNNNNNNNUUUUUUUUUULLLLLLLLLLLLL'
-	}
-
 	def postBuildActionsScript = config.postBuildActionsScript ?: {}
 
 	echo 'INFO: Job config parameters:\n' + mavenOptions + '\n' + pomDir + '\n' + repoURL + '\n' + branch + '\n' + browser + '\n' + browserURL + '\n' + browserVersion + '\n' + credentialsID
@@ -49,6 +45,7 @@ def call (body) {
 				if (preStepsStatus != 'FAILURE') {
 					mavenBuildStatus = executeBuildSteps({withMavenDeploy(pomDir, mavenOptions)}, 'Maven build')
 
+					config.postStepsScript()
 					postStepsStatus = executeBuildSteps(config.postStepsScript, 'Post Steps')
 				}
 
