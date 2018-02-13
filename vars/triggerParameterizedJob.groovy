@@ -4,6 +4,7 @@ def call(def jobName, def parameters, def wait = true) {
 	def parametersList = parameters.inject([]){list, key, value -> list << string(name:key, value: value)}
 	echo 'INFO: Triggering job ' + jobName	
    	jobStatus = build job: jobName, parameters: parametersList, wait: wait, propagate: false
+    echo 'IIIIIIIINFO: Jobstatus' + jobStatus
     if (jobStatus.result == 'FAILURE') {
         currentBuild.result = 'FAILURE'
         //Similar to throwing an error but no stack trace is printed
