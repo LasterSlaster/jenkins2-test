@@ -15,7 +15,7 @@ configMavenBuild {
 	postStepsScript = {
 		echo 'INFO: execute CLosure post steps'
 		echo ' INFO: currentBuild result in closure ' + currentBuild.result 
-		if (currentBuild.result == 'SUCCESS' || currentBuild.result == 'UNSTABLE') {
+		if (this.currentBuild.result == 'SUCCESS' || this.currentBuild.result == 'UNSTABLE') {
 			echo 'closure after if statement'
 			updateBuildName('acn-hpsapf-referenceapplication-parent')
 			withMavenSonarCheck(pomDir)
