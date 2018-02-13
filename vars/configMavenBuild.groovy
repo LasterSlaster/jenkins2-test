@@ -8,19 +8,19 @@ def call (body) {
 	body()
 
 	
-	def mavenOptions = config.mavenOptions ?: ''
-	def pomDir = config.pomDir ?: ''
-	def repoURL = config.repoURL ?: ''	
-	def branch = config.branch ?: ''
-	def browser = config.browser ?: ''
-	def browserURL = config.browserURL ?: ''
-	def browserVersion = config.browserVersion ?: ''
-	def credentialsID = config.credentialsID ?: ''
-	def preStepsScript = config.preStepsScript ?: {}
+	config.mavenOptions = config.mavenOptions ?: ''
+	config.pomDir = config.pomDir ?: ''
+	config.repoURL = config.repoURL ?: ''	
+	config.branch = config.branch ?: ''
+	config.browser = config.browser ?: ''
+	config.browserURL = config.browserURL ?: ''
+	config.browserVersion = config.browserVersion ?: ''
+	config.credentialsID = config.credentialsID ?: ''
+	config.preStepsScript = config.preStepsScript ?: {}
 	config.preStepsScript.delegate = this
-	def postStepsScript = config.postStepsScript ?: {}
+	config.postStepsScript = config.postStepsScript ?: {}
 	config.postStepsScript.delegate = this
-	def postBuildActionsScript = config.postBuildActionsScript ?: {}
+	config.postBuildActionsScript = config.postBuildActionsScript ?: {}
 	config.postBuildActionsScript.delegate = this
 
 	def preStepsStatus
@@ -41,15 +41,15 @@ def call (body) {
 				echo 'INFO: Setting environment variable for pom version'
 				env.POM_VERSION = getPOMVersion(pomDir)
 
-				preStepsStatus = executeBuildSteps(preStepsScript, 'Pre Steps')
+				preStepsStatus = executeBuildSteps(config.preStepsScript, 'Pre Steps')
 
 				if (preStepsStatus != 'FAILURE') {
 					mavenBuildStatus = executeBuildSteps({withMavenDeploy(pomDir, mavenOptions)}, 'Maven build')
 
-					postStepsStatus = executeBuildSteps(postStepsScript, 'Post Steps')
+					postStepsStatus = executeBuildSteps(config.postStepsScript, 'Post Steps')
 				}
 
-				postBuildActionStatus = executeBuildSteps(postBuildActionsScript, 'Post-build Actions')
+				postBuildActionStatus = executeBuildSteps(config.postBuildActionsScript, 'Post-build Actions')
 			} catch (e) {
 				echo 'ERROR: This job ended unexpectedly!\nStack trace:\n' + e
 				currentBuild.result = 'FAILURE'
