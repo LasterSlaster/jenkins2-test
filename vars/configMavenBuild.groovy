@@ -1,5 +1,7 @@
 package vars
 
+import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
+
 def call (body) {
 
 	def config = [:]
@@ -57,6 +59,7 @@ def call (body) {
 			} catch (FlowInterruptedException interruptEx) {
 				echo 'WARNING: This job was INTERRUPTED'
 				currentBuild.result = 'ABORTED'
+				throw interruptEx
 			} catch (e) {
 				echo 'ERROR: This job ended unexpectedly!\nStack trace:\n' + e
 				currentBuild.result = 'FAILURE'
