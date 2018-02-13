@@ -219,7 +219,7 @@ ReferenceAppSnapshotBuildDeployJob.createJob(this)
 ComponentsPipelineTriggerJob.createJob(this)
 
 //Empty jobs which get triggered
-job('hpsapf-referenceapplication-deployment-staticcontent')
-job('hpsapf-referenceapplication-deployment')
-jpob('hpsapf referenceapp batches linux deploy')
-job('hpsapf referenceapp batches windows deploy')
+pipelineJob('hpsapf-referenceapplication-deployment-staticcontent')
+pipelineJob('hpsapf-referenceapplication-deployment')
+pipelineJob('hpsapf referenceapp batches linux deploy')
+pipelineJob('hpsapf referenceapp batches windows deploy')
