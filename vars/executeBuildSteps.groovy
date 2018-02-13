@@ -1,4 +1,4 @@
-def call(Closure script = {}, String name = 'Step') {
+def call(def script, String name = 'Step') {
 
 	echo 'INFO: Execute ' + name
 	try {
