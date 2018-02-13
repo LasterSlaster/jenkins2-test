@@ -20,6 +20,7 @@ def call (body) {
 	config.preStepsScript.delegate = this
 	config.postStepsScript = config.postStepsScript ?: {}
 	config.postStepsScript.delegate = this
+	def test = config.postStepsScript
 	config.postBuildActionsScript = config.postBuildActionsScript ?: {}
 	config.postBuildActionsScript.delegate = this
 
@@ -45,7 +46,7 @@ def call (body) {
 
 				if (preStepsStatus != 'FAILURE') {
 					mavenBuildStatus = executeBuildSteps({withMavenDeploy(config.pomDir, config.mavenOptions)}, 'Maven build')
-
+					test()
 					postStepsStatus = executeBuildSteps(config.postStepsScript, 'Post Steps')
 				}
 
