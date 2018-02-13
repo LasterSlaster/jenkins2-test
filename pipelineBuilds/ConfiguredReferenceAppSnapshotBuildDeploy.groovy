@@ -21,6 +21,8 @@ configMavenBuild {
 			triggerParameterizedJob('hpsapf-referenceapplication-deployment', ['Version': env.POM_VERSION, 'ArtifactId': 'accenture-hpsapf-masterdatamanagement-webservices', 'GroupId' : 'com.accenture.hpsapf', 'Stage' : 'developement', 'Repository' : 'snapshots', 'ApplicationType' : 'Webservice'])
 			triggerParameterizedJob('hpsapf referenceapp batches linux deploy', ['Version': env.POM_VERSION, 'Stage' : 'developement', 'Repository' : 'snapshots', 'BuildMode' : 'snapshot', 'ApplicationType' : 'Batch'])
 			triggerParameterizedJob('hpsapf referenceapp batches windows deploy', ['Version': env.POM_VERSION, 'Stage' : 'developement', 'Repository' : 'snapshots', 'BuildMode' : 'snapshot', 'ApplicationType' : 'Batch'])
+		} else {
+			error('ERROR: Skiped post steps because currentBuild result is neither SUCCESS nor UNSTABLE')
 		}
 	} // steps to execute after the maven build
 	postBuildActionsScript = {} // steps to execute after the build process

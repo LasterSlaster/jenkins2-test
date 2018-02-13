@@ -20,6 +20,8 @@ def call (body) {
 	def postStepsScript = config.postStepsScript ?: {}
 	def postBuildActionsScript = config.postBuildActionsScript ?: {}
 
+	echo 'INFO: Job config parameters:\n' + mavenOptions + '\n' + pomDir + '\n' + repoURL + '\n' + branch + '\n' + browser + '\n' + browserURL + '\n' + browserVersion + '\n' + credentialsID
+
 	def preStepsStatus
 	def mavenBuildStatus
 	def postStepsStatus
