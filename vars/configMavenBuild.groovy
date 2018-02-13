@@ -45,6 +45,7 @@ def call (body) {
 				if (preStepsStatus != 'FAILURE') {
 					mavenBuildStatus = executeBuildSteps({withMavenDeploy(pomDir, mavenOptions)}, 'Maven build')
 
+					echo ' INFO: currentBuild result before closure ' + currentBuild.result 
 					config.postStepsScript()
 					postStepsStatus = executeBuildSteps(config.postStepsScript, 'Post Steps')
 				}
