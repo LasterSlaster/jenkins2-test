@@ -5,7 +5,7 @@ def call (String mavenOptions = 'snapshots::default::http://172.31.22.80:8081/ne
 
 	dir (pomDir) {
 		withMaven {
-			sh 'mvn clean deploy ' + options
+			bat 'mvn clean deploy ' + options
 		}
 	}
 }

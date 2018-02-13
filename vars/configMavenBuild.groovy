@@ -23,8 +23,6 @@ def call (body) {
 	def postBuildActionsScript = config.postBuildActionsScript ?: {}
 	config.postBuildActionsScript.delegate = this
 
-	echo 'INFO: Job config parameters:\n' + mavenOptions + '\n' + pomDir + '\n' + repoURL + '\n' + branch + '\n' + browser + '\n' + browserURL + '\n' + browserVersion + '\n' + credentialsID
-
 	def preStepsStatus
 	def mavenBuildStatus
 	def postStepsStatus
