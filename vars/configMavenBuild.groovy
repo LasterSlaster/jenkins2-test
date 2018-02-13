@@ -36,15 +36,15 @@ def call (body) {
 
 				echo 'INFO: Checking-out repository'
 
-				checkoutGitRepo(repoURL, credentialsID, branch, browser, browserURL, browserVersion)
+				checkoutGitRepo(config.repoURL, config.credentialsID, config.branch, config.browser, config.browserURL, config.browserVersion)
 				
 				echo 'INFO: Setting environment variable for pom version'
-				env.POM_VERSION = getPOMVersion(pomDir)
+				env.POM_VERSION = getPOMVersion(config.pomDir)
 
 				preStepsStatus = executeBuildSteps(config.preStepsScript, 'Pre Steps')
 
 				if (preStepsStatus != 'FAILURE') {
-					mavenBuildStatus = executeBuildSteps({withMavenDeploy(pomDir, mavenOptions)}, 'Maven build')
+					mavenBuildStatus = executeBuildSteps({withMavenDeploy(config.pomDir, config.mavenOptions)}, 'Maven build')
 
 					postStepsStatus = executeBuildSteps(config.postStepsScript, 'Post Steps')
 				}
