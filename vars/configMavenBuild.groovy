@@ -17,10 +17,13 @@ def call (body) {
 	config.browserVersion = config.browserVersion ?: ''
 	config.credentialsID = config.credentialsID ?: ''
 	config.preStepsScript = config.preStepsScript ?: {}
+	config.postBuildActionsScript.resolveStrategy = Closure.DELEGATE_FIRST
 	config.preStepsScript.delegate = this
 	config.postStepsScript = config.postStepsScript ?: {}
+	config.postBuildActionsScript.resolveStrategy = Closure.DELEGATE_FIRST
 	config.postStepsScript.delegate = this
 	config.postBuildActionsScript = config.postBuildActionsScript ?: {}
+	config.postBuildActionsScript.resolveStrategy = Closure.DELEGATE_FIRST
 	config.postBuildActionsScript.delegate = this
 
 	def preStepsStatus
