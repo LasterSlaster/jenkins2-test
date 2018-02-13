@@ -21,6 +21,7 @@ def call (body) {
 	config.postStepsScript = config.postStepsScript ?: {}
 	config.postStepsScript.delegate = this
 	def test = config.postStepsScript
+	test.delegate = this
 	config.postBuildActionsScript = config.postBuildActionsScript ?: {}
 	config.postBuildActionsScript.delegate = this
 
