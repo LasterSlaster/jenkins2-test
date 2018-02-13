@@ -53,6 +53,10 @@ def call (body) {
 				}
 
 				postBuildActionStatus = executeBuildSteps(config.postBuildActionsScript, 'Post-build Actions')
+
+			} catch (FlowInterruptedException interruptEx) {
+				echo 'WARNING: This job was INTERRUPTED'
+				currentBuild.result = 'ABORTED'
 			} catch (e) {
 				echo 'ERROR: This job ended unexpectedly!\nStack trace:\n' + e
 				currentBuild.result = 'FAILURE'
