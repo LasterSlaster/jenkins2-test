@@ -6,9 +6,15 @@ def call (body) {
 	body.delegate = config
 	body()
 
-	def buildScript = config.buildScript ?: {}
-	def testScript = config.testScript ?: {}
-	def deployScript = config.deployScript ?: {}
+	config.buildScript = config.buildScript ?: {}
+	config.buildScript.resolveStrategy = Closure.DELEGATE_FIRST
+	config.buildScript.delegate = this
+	config.testScript = config.testScript ?: {}
+	config.testScript.resolveStrategy = Closure.DELEGATE_FIRST
+	config.testScript.delegate = this
+	config.deployScript = config.deployScript ?: {}
+	config.deployScript.resolveStrategy = Closure.DELEGATE_FIRST
+	config.deployScript.delegate = this
 
 	enum Steps {
 	    BUILD(0, 'Build'),
@@ -71,21 +77,21 @@ def call (body) {
 			    stage('Build') {
 		        	if (stages.contains(Steps.BUILD)) {
 			            echo 'INFO: Execute \\\'Build\\\''
-			            buildScript()
+			            config.buildScript()
 			        }
 			    }
 
 			    stage('Tests') {
 			        if (stages.contains(Steps.TEST)) {
 			        	echo 'INFO: Execute stage \\\'Tests\\\''
-			           	testScript()
+			           	config.testScript()
 			        }
 			    }
 
 			    stage('Deploy') {
 			        if (stages.contains(Steps.DEPLOY)) {
 			            echo 'INFO: Execute stage \\\'Deploy\\\''
-			            deployScript()
+			            config.deployScript()
 			        }
 			    }
 			} catch (e) {

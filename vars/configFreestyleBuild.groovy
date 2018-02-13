@@ -6,8 +6,15 @@ def call (body) {
 	body.delegate = config
 	body()
 
-	def buildStepsScript = config.buildStepsScript ?: {}
-	def postBuildActionsScript = config.postBuildActionsScript ?: {}
+	config.branch = config.branch ?: ''
+	config.credentials = config.credentials ?: ''
+	config.repoURL = config.repoURL ?: ''
+	config.buildStepsScript = config.buildStepsScript ?: {}
+	config.buildStepsScript.resolveStrategy = Closure.DELEGATE_FIRST
+	config.buildStepsScript.delegate = this
+	config.postBuildActionsScript = config.postBuildActionsScript ?: {}
+	config.postBuildActionsScript.resolveStrategy = Closure.DELEGATE_FIRST
+	config.postBuildActionsScript.delegate = this
 	
 	def buildStepsStatus
 	def postBuildActionStatus
@@ -19,11 +26,11 @@ def call (body) {
 				currentBuild.result = 'SUCCESS'
 
 				echo 'INFO: Checking-out repository'
-				checkoutGitRepo(repoURL, credentials, branch)
+				checkoutGitRepo(config.repoURL, config.credentials, config.branch)
 				
-				buildStepsStatus = executeBuildSteps(buildStepsScript, 'Build steps')
+				buildStepsStatus = executeBuildSteps(config.buildStepsScript, 'Build steps')
 
-				postBuildActionStatus = executeBuildSteps(postBuildActionsScript, 'Post-build Actions')
+				postBuildActionStatus = executeBuildSteps(config.postBuildActionsScript, 'Post-build Actions')
 			} catch (e) {
 				echo 'ERROR: This job ended unexpectedly!\nStack trace:\n' + e
 				currentBuild.result = 'FAILURE'
