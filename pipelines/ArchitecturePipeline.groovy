@@ -135,10 +135,10 @@ node {
             
             echo '\n'
             echo '************************************************'
-            echo ' Triggered build for job \'01. HPS APF DSL Plugins Snapshot\' returned: ' + dslResult.result
-            echo ' Triggered build for job \'02. HPS APF Architecture Snapshot\' returned: ' + archResult.result
-            echo ' Triggered build for job \'03. HPS APF Components Snapshot\' returned: ' + compResult.result
-            echo ' Triggered build for job \' 6. HPS APF ReferenceApp Snapshot Build Deploy\' returned: ' + refAppResult.result
+            echo ' Triggered build for job \'01. HPS APF DSL Plugins Snapshot\' returned: ' + dslResult?.result
+            echo ' Triggered build for job \'02. HPS APF Architecture Snapshot\' returned: ' + archResult?.result
+            echo ' Triggered build for job \'03. HPS APF Components Snapshot\' returned: ' + compResult?.result
+            echo ' Triggered build for job \' 6. HPS APF ReferenceApp Snapshot Build Deploy\' returned: ' + refAppResult?.result
             echo 'Pipeline ends with status: ' + currentBuild.result
             echo '************************************************'
         }
