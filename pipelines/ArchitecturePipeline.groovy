@@ -25,7 +25,7 @@ enum Steps {
     }
 
     public static Steps getByName(name) {
-        echo 'getting by name ' + name.toString()
+      //  echo 'getting by name ' + name.toString()
         for(Steps step : Steps.values()) {
             if(step.name.equalsIgnoreCase(name)) {
                 return step
