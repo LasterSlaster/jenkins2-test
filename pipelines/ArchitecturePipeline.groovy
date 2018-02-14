@@ -1,12 +1,14 @@
 package pipelines
-//TODO: Create Configuratble BasePipeline Script
+
+import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
+
 enum Steps {
     DLS_BUILD(0, 'DSL Plugin Build'),
     ARCH_BUILD(1, 'Architecture Build'),
     COMPONENTS_BUILD(2, 'Components Build'),
     REFAPP_BUILD(3, 'ReferenceApp Build')
 
-    Steps(int id, String name) {
+    Steps(id, name) {
         this.id = id
         this.name = name
     }
@@ -22,7 +24,7 @@ enum Steps {
         name
     }
 
-    public static Steps getByName(String name) {
+    public static Steps getByName(name) {
         echo 'getting by name ' + name
         for(Steps step : Steps.values()) {
             if(step.name.equalsIgnoreCase(name)) {
@@ -33,7 +35,7 @@ enum Steps {
     }
 }
 
-def prepareStages(def startPoint){
+def prepareStages(startPoint){
     echo 'INFO: Preparing build steps starting from ' + startPoint
     Set steps = new LinkedHashSet()
     steps.add(Steps.DLS_BUILD)
@@ -118,6 +120,14 @@ node {
                     }
                 }
             }
+        } catch (FlowInterruptedException interruptEx) {
+            echo 'WARNING: This job was INTERRUPTED'
+            currentBuild.result = 'ABORTED'
+            throw interruptEx
+        } catch (e) {
+            echo 'ERROR: This job ended unexpectedly!\nStack trace:\n' + e
+            currentBuild.result = 'FAILURE'
+            throw e
         } finally {
             echo 'INFO: Sending email'
             emailBuildStatus()

@@ -1,4 +1,4 @@
-def call(String jobName, String stageName, List stages, Steps step) {
+def call(jobName, stageName, stages, step) {
 
 	def jobResult
 

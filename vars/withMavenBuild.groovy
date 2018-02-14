@@ -1,4 +1,4 @@
-def call (String options = '', String pomDir = '.') {
+def call (options = '', pomDir = '.') {
 //TODO: Replace withMaven step to remove the dependeny to a plugin
 	
 	echo 'INFO: Executing maven build'

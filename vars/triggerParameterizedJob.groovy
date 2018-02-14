@@ -1,4 +1,4 @@
-def call(def jobName, def parameters, def wait = true) {
+def call(jobName, parameters, wait = true) {
 
 	def jobStatus
 	def parametersList = parameters.inject([]){list, key, value -> list << string(name:key, value: value)}

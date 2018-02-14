@@ -1,4 +1,4 @@
-def call(String options = '', String pomDir = '.') {
+def call(options = '', pomDir = '.') {
 	
 	echo 'INFO: Executing maven sonar check'
 
