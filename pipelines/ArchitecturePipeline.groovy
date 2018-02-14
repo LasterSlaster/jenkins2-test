@@ -64,13 +64,13 @@ node {
 
     timestamps {
         try {
-            cleanWS()
+            cleanWs()
             currentBuild.result = 'SUCCESS'
 
             stage('DSL Plugin Build') {
                 if (stages.contains(Steps.DLS_BUILD)) {
-                    echo 'INFO: Triggering job 01. H&PS APF DSL Plugins Snapshot'
-                    dslResult = build job: '01. H&PS APF DSL Plugins Snapshot', propagate: false
+                    echo 'INFO: Triggering job 01. HPS APF DSL Plugins Snapshot'
+                    dslResult = build job: '01. HPS APF DSL Plugins Snapshot', propagate: false
                     if (dslResult.result == 'UNSTABLE') {
                         error('ERROR: Stage DSL Plugin Build is UNSTABLE')
                     }
@@ -82,8 +82,8 @@ node {
             
             stage('Architecture Build') {
                 if (stages.contains(Steps.ARCH_BUILD)) {
-                    echo 'INFO: Triggering job 02. H&PS APF Architecture Snapshot'
-                        archResult = build job: '02. H&PS APF Architecture Snapshot', propagate: false
+                    echo 'INFO: Triggering job 02. HPS APF Architecture Snapshot'
+                        archResult = build job: '02. HPS APF Architecture Snapshot', propagate: false
                     if (archResult.result == 'UNSTABLE') {
                         echo 'WARNING: Stage Architecture Build is UNSTABLE'
                         currentBuild.result = 'UNSTABLE'
@@ -96,8 +96,8 @@ node {
 
             stage('Components Build') {
                 if (stages.contains(Steps.COMPONENTS_BUILD)) {
-                    echo 'INFO: Triggering job 03. H&PS APF Components Snapshot'
-                    compResult = build job: '03. H&PS APF Components Snapshot', propagate: false
+                    echo 'INFO: Triggering job 03. HPS APF Components Snapshot'
+                    compResult = build job: '03. HPS APF Components Snapshot', propagate: false
                     if (compResult.result == 'UNSTABLE') {
                         echo 'WARNING: Stage Components Build is UNSTABLE'
                         currentBuild.result = 'UNSTABLE'
@@ -110,8 +110,8 @@ node {
 
             stage('ReferenceApp Build') {
                 if (stages.contains(Steps.REFAPP_BUILD)) {
-                    echo 'INFO: Triggering job 6. H&PS APF ReferenceApp Snapshot Build Deploy'
-                    refAppResult = build job: '6. H&PS APF ReferenceApp Snapshot Build Deploy', propagate: false
+                    echo 'INFO: Triggering job 6. HPS APF ReferenceApp Snapshot Build Deploy'
+                    refAppResult = build job: '6. HPS APF ReferenceApp Snapshot Build Deploy', propagate: false
                     if (refAppResult.result == 'UNSTABLE') {
                         echo 'WARNING: Stage ReferenceApp Build is UNSTABLE'
                         currentBuild.result = 'UNSTABLE'
