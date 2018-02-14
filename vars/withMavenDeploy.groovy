@@ -5,7 +5,7 @@ def call (mavenOptions = 'snapshots::default::http://172.31.22.80:8081/nexus/con
 
 	dir (pomDir) {
 		withMaven {
-			bat 'mvn clean deploy ' + options
+			bat 'mvn clean deploy ' + mavenOptions
 		}
 	}
 }
