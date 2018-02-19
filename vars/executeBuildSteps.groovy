@@ -6,7 +6,7 @@ def call(script = {}, name = 'Step') {
 	} catch (e) {
 		echo 'ERROR: ' + name + ' FAILED\n' + e.getMessage
 		currentBuild.result = 'FAILURE'
-		throw e
+		throw e //TODO: remove after testing
 	} finally {
 		if (currentBuild.result == 'UNSTABLE') {
 			echo 'WARNING: ' + name + ' is UNSTABLE'

@@ -43,8 +43,8 @@ def call (body) {
 
 				//checkoutGitRepo(config.repoURL, config.credentialsID, config.branch, config.browser, config.browserURL, config.browserVersion)
 				
-				echo 'INFO: Setting environment variable for pom version'
-				env.POM_VERSION = getPOMVersion(config.pomDir)
+				//echo 'INFO: Setting environment variable for pom version'
+				//env.POM_VERSION = getPOMVersion(config.pomDir)
 
 				preStepsStatus = executeBuildSteps(config.preStepsScript, 'Pre Steps')
 
