@@ -41,7 +41,7 @@ def call (body) {
 
 				echo 'INFO: Checking-out repository'
 
-				checkoutGitRepo(config.repoURL, config.credentialsID, config.branch, config.browser, config.browserURL, config.browserVersion)
+				//checkoutGitRepo(config.repoURL, config.credentialsID, config.branch, config.browser, config.browserURL, config.browserVersion)
 				
 				echo 'INFO: Setting environment variable for pom version'
 				env.POM_VERSION = getPOMVersion(config.pomDir)
