@@ -2,11 +2,11 @@ def call(script = {}, name = 'Step') {
 
 	echo 'INFO: Execute ' + name
 	try {
-		error('test error')
 		script()
 	} catch (e) {
 		echo 'ERROR: ' + name + ' FAILED\n' + e.getMessage
 		currentBuild.result = 'FAILURE'
+		throw e
 	} finally {
 		if (currentBuild.result == 'UNSTABLE') {
 			echo 'WARNING: ' + name + ' is UNSTABLE'
