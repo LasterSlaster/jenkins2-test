@@ -4,7 +4,7 @@ def call(options = '', pomDir = '.') {
 
 	dir (pomDir) {
 	    withMaven {
-	    	bat 'mvn sonar:sonar ' + options
+	    	sh 'mvn sonar:sonar ' + options
 	    }
 	}
 }

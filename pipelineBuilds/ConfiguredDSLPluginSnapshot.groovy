@@ -2,7 +2,7 @@
 	
 configMavenBuild {
 
-	mavenOptions = '-X -Pjenkins-build -Dfile.encoding=UTF-8 -DaltDeploymentRepository=snapshots::default::http://172.31.22.80:8081/nexus/content/repositories/snapshots/ -B -Dmaven.test.skip=false' //Alternative maven repository for maven build 
+	mavenOptions = '-X -Plocal-build -Dfile.encoding=UTF-8 -DaltDeploymentRepository=snapshots::default::http://172.31.22.80:8081/nexus/content/repositories/snapshots/ -B -Dmaven.test.skip=false' //Alternative maven repository for maven build 
 	pomDir = 'com.accenture.hpsapf.dsl.parent'	// path to the directory of the pom - defaults to '.' [currentWS]
 	repoURL = 'http://172.31.22.80/gitweb/hpsapf-tools.git' // specifies the url to the repository
 	credentialsID = 'myID' // specifies the jenkins id for the repository cedentials
@@ -14,12 +14,12 @@ configMavenBuild {
 	postStepsScript = {
 		if (currentBuild.result == 'SUCCESS') {
 			echo 'INFO: Executing shell'
-	        bat 'temp_dir_name=temp_zs_`date +%d-%m-%y_%H-%M-%S`\r\nmkdir /tmp/$temp_dir_name\r\nwget -S -O \"/tmp/$temp_dir_name/com.accenture.hpsapf.dsl.updatesite.zip\" \"http://172.31.22.80:8081/nexus/service/local/artifact/maven/redirect?r=snapshots&g=com.accenture.hpsapf&a=com.accenture.hpsapf.dsl.updatesite&v=' + env.POM_VERSION + '&p=zip\"\r\nrm -rf /srv/www/updatesite/development/*\r\nunzip -o /tmp/$temp_dir_name/com.accenture.hpsapf.dsl.updatesite.zip -d /srv/www/updatesite/development\r\nrm -rf /tmp/$temp_dir_name'
+	        sh 'temp_dir_name=temp_zs_`date +%d-%m-%y_%H-%M-%S`\r\nmkdir /tmp/$temp_dir_name\r\nwget -S -O \"/tmp/$temp_dir_name/com.accenture.hpsapf.dsl.updatesite.zip\" \"http://172.31.22.80:8081/nexus/service/local/artifact/maven/redirect?r=snapshots&g=com.accenture.hpsapf&a=com.accenture.hpsapf.dsl.updatesite&v=' + env.POM_VERSION + '&p=zip\"\r\nrm -rf /srv/www/updatesite/development/*\r\nunzip -o /tmp/$temp_dir_name/com.accenture.hpsapf.dsl.updatesite.zip -d /srv/www/updatesite/development\r\nrm -rf /tmp/$temp_dir_name'
 		
 			updateBuildName('com.accenture.hpsapf.dsl.parent/')
 
 			echo 'INFO: Executing shell'
-            bat 'temp_dir_name=temp_zs_`date +%d-%m-%y_%H-%M-%S`\r\nmkdir /tmp/$temp_dir_name\r\nwget -S -O \"/tmp/$temp_dir_name/com.accenture.hpsapf.dsl.helpdsl.updatesite.zip\" \"http://172.31.22.80:8081/nexus/service/local/artifact/maven/redirect?r=snapshots&g=com.accenture.hpsapf&a=com.accenture.hpsapf.dsl.helpdsl.updatesite&v=' + env.POM_VERSION + '&p=zip\"'
+            sh 'temp_dir_name=temp_zs_`date +%d-%m-%y_%H-%M-%S`\r\nmkdir /tmp/$temp_dir_name\r\nwget -S -O \"/tmp/$temp_dir_name/com.accenture.hpsapf.dsl.helpdsl.updatesite.zip\" \"http://172.31.22.80:8081/nexus/service/local/artifact/maven/redirect?r=snapshots&g=com.accenture.hpsapf&a=com.accenture.hpsapf.dsl.helpdsl.updatesite&v=' + env.POM_VERSION + '&p=zip\"'
 		}
 	} // steps to execute after the maven build
 	postBuildActionsScript = {} // steps to execute after the build process

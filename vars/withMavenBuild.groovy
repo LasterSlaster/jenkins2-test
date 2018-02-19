@@ -5,7 +5,7 @@ def call (options = '', pomDir = '.') {
 	
 	dir (pomDir) {
 		withMaven {
-			bat 'mvn clean build ' + options
+			sh 'mvn clean build ' + options
 		}
 	}
 }

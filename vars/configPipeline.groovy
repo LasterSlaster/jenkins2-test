@@ -68,7 +68,7 @@ def call (body) {
 	    return finalSteps
 	}
 
-	def stages = prepareStages(Steps.getByName(startStage))
+	def stages = prepareStages(Steps.getByName(params.START_STAGE))
 
 	node {
 		timestamps {
