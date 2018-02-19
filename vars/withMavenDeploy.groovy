@@ -4,6 +4,7 @@ def call (mavenOptions = 'snapshots::default::http://172.31.22.80:8081/nexus/con
 	echo 'INFO: Executing maven deploy'
 	dir (pomDir) {
 		withMaven {
+			echo 'INFO: Maven Options -> ' + mavenOptions
 			sh 'mvn clean deploy ' + mavenOptions
 		}
 	}

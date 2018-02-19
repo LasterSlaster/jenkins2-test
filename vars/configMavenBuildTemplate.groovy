@@ -2,7 +2,7 @@
 	
 configMavenBuild {
 
-	def mavenOptions = '' //Alternative maven repository for maven build 
+	def mavenOptions = '' //Options for maven command deploy
 	def pomDir = ''	// path to the directory of the pom - defaults to '.' [currentWS]
 	def repoURL = '' // specifies the url to the repository
 	def branch = '' // specifies the branch to pull form the repo
