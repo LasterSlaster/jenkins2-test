@@ -4,7 +4,6 @@ def call (mavenOptions = '', pomDir = '.') {
 	echo 'INFO: Executing maven deploy'
 	dir (pomDir) {
 		withMaven {
-			error('eeeeeeeeeerror')
 			sh 'mvn clean deploy ' + mavenOptions
 		}
 	}

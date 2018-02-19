@@ -49,6 +49,7 @@ def call (body) {
 				preStepsStatus = executeBuildSteps(config.preStepsScript, 'Pre Steps')
 
 				if (preStepsStatus != 'FAILURE') {
+					withMavenDeploy(config.mavenOptions, config.pomDir)
 					mavenBuildStatus = executeBuildSteps({withMavenDeploy(config.mavenOptions, config.pomDir)}, 'Maven build')
 					
 					postStepsStatus = executeBuildSteps(config.postStepsScript, 'Post Steps')
