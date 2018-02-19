@@ -1,10 +1,9 @@
-def call (mavenOptions = 'snapshots::default::http://172.31.22.80:8081/nexus/content/repositories/snapshots/', pomDir = '.') {
+def call (mavenOptions = '', pomDir = '.') {
 //TODO: Replace withMaven step to remove the dependeny to a plugin
 
 	echo 'INFO: Executing maven deploy'
 	dir (pomDir) {
 		withMaven {
-			echo 'INFO: Maven Options -> ' + mavenOptions
 			sh 'mvn clean deploy ' + mavenOptions
 		}
 	}
