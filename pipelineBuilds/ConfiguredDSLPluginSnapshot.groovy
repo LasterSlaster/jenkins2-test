@@ -22,5 +22,4 @@ configMavenBuild {
 		}
 	} // steps to execute after the maven build
 	postBuildActionsScript = {} // steps to execute after the build process
-
 }	
