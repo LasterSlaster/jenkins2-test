@@ -1,6 +1,6 @@
 def call(pomDir = './') {
 
-	if (pomDir[-1] != '/' || pomDri[-1] != '\\') {
+	if (pomDir[-1] != '/' || pomDir[-1] != '\\') {
 		pomDir += '/'
 	}
 	getVersion(readMavenPom( file: pomDir + 'pom.xml'))
