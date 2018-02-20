@@ -4,7 +4,8 @@ def call (mavenOptions = '', pomDir = '.') {
 	echo 'INFO: Executing maven deploy'
 	dir (pomDir) {
 		withMaven {
-			sh 'mvn clean deploy ' + mavenOptions
+			//TODO: Change install back to deploy
+			sh 'mvn clean install ' + mavenOptions
 		}
 	}
 }

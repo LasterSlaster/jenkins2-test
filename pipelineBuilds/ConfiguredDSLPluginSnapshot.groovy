@@ -1,6 +1,7 @@
 @Library('ACN_HPS_APF_Library')_
 
 configMavenBuild {
+	//TODO: Change profile (-P) - local-build only for local testing
 	mavenOptions = '-X -Plocal-build -Dfile.encoding=UTF-8 -DaltDeploymentRepository=snapshots::default::http://172.31.22.80:8081/nexus/content/repositories/snapshots/ -B -Dmaven.test.skip=false' //Options for maven command deploy
 	pomDir = 'com.accenture.hpsapf.dsl.parent'	// path to the directory of the pom - defaults to '.' [currentWS]
 	repoURL = 'http://172.31.22.80/gitweb/hpsapf-tools.git' // specifies the url to the repository
