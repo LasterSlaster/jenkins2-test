@@ -5,9 +5,10 @@ def call(script = {}, name = 'Step') {
 		error('test')
 		script()
 	} catch (e) {
-		throw e
 		echo 'ERROR: ' + name + ' FAILED\n' + e.getMessage
-		currentBuild.result = 'FAILURE'
+		if (currentBuild.result != 'UNSTABLE') {
+			currentBuild.result = 'FAILURE'
+		}
 	} finally {
 		if (currentBuild.result == 'UNSTABLE') {
 			echo 'WARNING: ' + name + ' is UNSTABLE'
@@ -15,6 +16,6 @@ def call(script = {}, name = 'Step') {
 			echo 'INFO: ' + name + ' is SUCCESS'
 			currentBuild.result = 'SUCCESS'
 		}
-		return currentBuild.result
 	}
+	return currentBuild.result
 }
