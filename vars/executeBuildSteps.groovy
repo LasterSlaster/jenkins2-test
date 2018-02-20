@@ -2,7 +2,6 @@ def call(script = {}, name = 'Step') {
 
 	echo 'INFO: Execute ' + name
 	try {
-		error('test')
 		script()
 	} catch (e) {
 		echo 'ERROR: ' + name + ' FAILED\n' + e.getMessage()
