@@ -32,7 +32,7 @@ def call (body) {
 
 				postBuildActionStatus = executeBuildSteps(config.postBuildActionsScript, 'Post-build Actions')
 			} catch (e) {
-				echo 'ERROR: This job ended unexpectedly!\nStack trace:\n' + e
+				echo 'ERROR: This job ended unexpectedly!\nStack trace:\n' + e.getMessage()
 				currentBuild.result = 'FAILURE'
 				throw e
 			} finally {

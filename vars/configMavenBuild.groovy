@@ -61,7 +61,7 @@ def call (body) {
 				currentBuild.result = 'ABORTED'
 				throw interruptEx
 			} catch (e) {
-				echo 'ERROR: This job ended unexpectedly!\nStack trace:\n' + e
+				echo 'ERROR: This job ended unexpectedly!\nStack trace:\n' + e.getMessage()
 				currentBuild.result = 'FAILURE'
 				throw e
 			} finally {
