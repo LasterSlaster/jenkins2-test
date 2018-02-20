@@ -1,7 +1,7 @@
 def call(script = {}, name = 'Step') {
 
 	echo 'INFO: Execute ' + name
-	def stepStatus = 'SUCCESS'
+	def stepStatus
 	try {
 		script()
 	} catch (e) {
@@ -9,8 +9,10 @@ def call(script = {}, name = 'Step') {
 		stepStatus = 'FAILURE'
 		currentBuild.result = 'FAILURE'
 	}
-	echo 'INFO: ' + name + ' is SUCCESS'
-	stepStatus = 'SUCCESS'
-	currentBuild.result = 'SUCCESS'
+	if (stepStatus != 'FAILURE') {
+		echo 'INFO: ' + name + ' is SUCCESS'
+		stepStatus = 'SUCCESS'
+		currentBuild.result = 'SUCCESS'
+	}
 	return stepStatus
 }
