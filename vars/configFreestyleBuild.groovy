@@ -29,8 +29,15 @@ def call (body) {
 				checkoutGitRepo(config.repoURL, config.credentials, config.branch)
 				
 				buildStepsStatus = executeBuildSteps(config.buildStepsScript, 'Build steps')
+				echo 'INFO: Current build status -> ' + currentBuild.result
 
 				postBuildActionStatus = executeBuildSteps(config.postBuildActionsScript, 'Post-build Actions')
+				echo 'INFO: Current build status -> ' + currentBuild.result
+
+			} catch (FlowInterruptedException interruptEx) {
+				echo 'WARNING: This job was INTERRUPTED'
+				currentBuild.result = 'ABORTED'
+				throw interruptEx	
 			} catch (e) {
 				echo 'ERROR: This job ended unexpectedly!\nStack trace:\n' + e.getMessage()
 				currentBuild.result = 'FAILURE'
