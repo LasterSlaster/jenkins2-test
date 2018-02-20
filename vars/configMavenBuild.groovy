@@ -47,14 +47,18 @@ def call (body) {
 				//env.POM_VERSION = getPOMVersion(config.pomDir)
 
 				preStepsStatus = executeBuildSteps(config.preStepsScript, 'Pre Steps')
+				echo 'INFO: Current build status -> ' + currentBuild.result
 
 				if (preStepsStatus != 'FAILURE') {
 					mavenBuildStatus = executeBuildSteps({withMavenDeploy(config.mavenOptions, config.pomDir)}, 'Maven build')
-					
+					echo 'INFO: Current build status -> ' + currentBuild.result
+
 					postStepsStatus = executeBuildSteps(config.postStepsScript, 'Post Steps')
+					echo 'INFO: Current build status -> ' + currentBuild.result
 				}
 
 				postBuildActionStatus = executeBuildSteps(config.postBuildActionsScript, 'Post-build Actions')
+				echo 'INFO: Current build status -> ' + currentBuild.result
 
 			} catch (FlowInterruptedException interruptEx) {
 				echo 'WARNING: This job was INTERRUPTED'
