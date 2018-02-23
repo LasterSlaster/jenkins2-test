@@ -15,11 +15,12 @@ job('SeedJob') {
     }
     steps {
         dsl {
-            external('jobs/SeedJob.groovy')
+            external('jobs/SeedJobAll.groovy')
             removeAction('DELETE')
         }
     }
 }
+
 
 ArchitecturePipelineJob.createJob(this)
 
@@ -29,3 +30,9 @@ ComponentsSnapshotJob.createJob(this)
 ReferenceAppSnapshotBuildDeployJob.createJob(this)
 
 ComponentsPipelineTriggerJob.createJob(this)
+
+//Empty jobs which get triggered
+pipelineJob('hpsapf-referenceapplication-deployment-staticcontent')
+pipelineJob('hpsapf-referenceapplication-deployment')
+pipelineJob('hpsapf referenceapp batches linux deploy')
+pipelineJob('hpsapf referenceapp batches windows deploy')
